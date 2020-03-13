@@ -7,9 +7,37 @@ import './App.css';
 // See if you can put a stepper in the navbar; if not, put it below. One step for each card.
 
 // To-do, code:
+// Refactor to set appropriate CSS elements as a theme; figure out CSS-in-JSS. (In general, see if I'm including Material-ui specifiers in the most elegant way.)
 // Refactor MakeQuestion, RenderOptions to accepts props of array with questions, options.
 
+/// SEE ????: NEED TO FIGURE OUT HOW TO MAKE AN EVENT SUCH THAT  `this.questionRenderer` fires again on button click. 
+
 class MakeQuestion extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      questionNumber: true,
+    };
+    this.updateQuestionNumber = this.updateQuestionNumber.bind(this);
+  }
+
+  questionRenderer() {
+    const questionNumber = this.state.questionNumber;
+    return (
+      <RenderQuestions 
+        questionNumber={questionNumber}
+      />
+    )
+
+  }
+
+  updateQuestionNumber() {
+    const questionNumber = this.state.questionNumber;
+    questionNumber++;
+    this.setState({
+      questionNumber: questionNumber
+    })
+  }
 
   render(){
     return(
@@ -33,7 +61,7 @@ class MakeQuestion extends React.Component {
                 item 
                 xs={12}
                 >
-                  <RenderQuestions />
+                  <this.questionRenderer />
               </Grid>
               <RenderOptions />
         </Grid>
@@ -50,7 +78,7 @@ function RenderQuestions(props) {
     align="center"
     style={{width:360}}
     >
-      {questions[0]} 
+      {questions[props.questionNumber]} 
   </Typography>
   )
  }
@@ -66,7 +94,7 @@ function RenderOptions() {
             color="primary"
             // fullWidth="true"
             style={{width:200}}
-            onClick={() => alert("clicked")}
+            onClick={() => this.updateQuestionNumber()}
             > 
             {options[i]} 
           </Button>
