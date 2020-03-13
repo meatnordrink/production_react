@@ -19,10 +19,11 @@ class MakeQuestion extends React.Component {
       questionNumber: true,
     };
     this.updateQuestionNumber = this.updateQuestionNumber.bind(this);
+    this.questionRenderer = this.questionRenderer.bind(this);
   }
 
   questionRenderer() {
-    const questionNumber = this.state.questionNumber;
+    var questionNumber = this.state.questionNumber;
     return (
       <RenderQuestions 
         questionNumber={questionNumber}
@@ -32,7 +33,7 @@ class MakeQuestion extends React.Component {
   }
 
   updateQuestionNumber() {
-    const questionNumber = this.state.questionNumber;
+    var questionNumber = this.state.questionNumber;
     questionNumber++;
     this.setState({
       questionNumber: questionNumber
@@ -63,7 +64,9 @@ class MakeQuestion extends React.Component {
                 >
                   <this.questionRenderer />
               </Grid>
-              <RenderOptions />
+              <RenderOptions
+                updateQuestionNumber={this.updateQuestionNumber}
+                 />
         </Grid>
       </Paper>
     )
@@ -82,7 +85,7 @@ function RenderQuestions(props) {
   </Typography>
   )
  }
-function RenderOptions() {
+function RenderOptions(props) {
     let options = ["Not at all", "Several Days", "More than half the days", "Nearly every day"];
     let buttons = [];
     for (let i=0; i < options.length; i++) {
@@ -94,7 +97,7 @@ function RenderOptions() {
             color="primary"
             // fullWidth="true"
             style={{width:200}}
-            onClick={() => this.updateQuestionNumber()}
+            onClick={props.updateQuestionNumber}
             > 
             {options[i]} 
           </Button>
