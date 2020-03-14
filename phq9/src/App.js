@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Card, Grid, Typography, Paper } from '@material-ui/core';
+import { Button, Grid, Typography, Paper } from '@material-ui/core';
+// import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import './App.css';
 
 //To do, UI: 
@@ -7,10 +8,12 @@ import './App.css';
 // See if you can put a stepper in the navbar; if not, put it below. One step for each card.
 
 // To-do, code:
-// Refactor to set appropriate CSS elements as a theme; figure out CSS-in-JSS. (In general, see if I'm including Material-ui specifiers in the most elegant way.)
 // Refactor MakeQuestion, RenderOptions to accepts props of array with questions, options.
-// Deal with what happens when we get to end of questions array.
-// Record answers as variables; display at end.
+// Set up grid plug-in, chart at end
+
+// const theme = createMuiTheme{
+      // implement if I wish to customize colors, etc.
+// }
 
 
 class MakeQuestion extends React.Component {
@@ -28,8 +31,8 @@ class MakeQuestion extends React.Component {
   // eventually, write a function to bold "2 weeks"
 
   questionRenderer() {
-    var questionNumber = this.state.questionNumber;
-    var questions = this.questions;
+    let questionNumber = this.state.questionNumber;
+    let questions = this.questions;
     return (
       <RenderQuestions 
         questionNumber={questionNumber}
@@ -40,11 +43,13 @@ class MakeQuestion extends React.Component {
   }
 
   updateQuestionNumber(score) {
-    var questionNumber = this.state.questionNumber;
+    let questionNumber = this.state.questionNumber;
+    let userScore = this.state.userScore;
     questionNumber++;
+    userScore += score;
     this.setState({
       questionNumber: questionNumber,
-      userScore: userScore + score
+      userScore: userScore
     })
   }
 
@@ -68,7 +73,7 @@ class MakeQuestion extends React.Component {
           >
               <Grid 
                 item 
-                xs={12}
+                xs={10}
                 >
                   <this.questionRenderer />
               </Grid>
@@ -87,9 +92,9 @@ function RenderQuestions(props) {
   return(
   <Typography 
     variant="h6" 
-    gutterBottom="true" 
+    gutterBottom={true}
     align="center"
-    style={{width:360}}
+    // style={{width:360}}
     >
       {props.questions[props.questionNumber]} 
   </Typography>
@@ -97,38 +102,65 @@ function RenderQuestions(props) {
  }
 function RenderOptions(props) {
     if (props.questionNumber >= props.questions.length) {
+      const finalScore = props.userScore;
+      var depSeverity;
+      if (finalScore <5) {
+        depSeverity = "very mild";
+      } else if (finalScore <10) {
+        depSeverity = "mild";
+      } else if (finalScore <15) {
+        depSeverity = "moderate";
+      } else if (finalScore <19) {
+        depSeverity = "moderately severe";
+      } else if (finalScore >19) {
+        depSeverity = "severe";
+      } else {
+        depSeverity = "The score was not recorded."
+      }
       return(
-        <Typography>
-          Your depression score is: {props.userScore}
-        </Typography>
+        <Grid item xs={10}>
+          <Typography
+            variant="h6" 
+            paragraph={true}
+            align="center"
+          >
+            Your depression score is: {finalScore}/27. This is considered to be in the {depSeverity} range.
+          </Typography>
+          <Typography align="center">
+            Note: This assessment does not <em>diagnose</em> depression; only a trained professional can do that.
+          </Typography>
+
+        </Grid>
       );
     }
     let options = ["Not at all", "Several Days", "More than half the days", "Nearly every day"];
-    let buttons = [];
-    for (let i=0; i < options.length; i++) {
-      buttons.push(
-        <Grid item xs={8}>
+    let buttons = options.map( (option, index) => 
+        <Grid 
+          item 
+          xs={8}
+          key={option}
+          >
           <Button 
             variant="contained" 
             size="large"
             color="primary"
             // fullWidth="true"
             style={{width:200}}
-            score={i+1}
-            onClick={props.updateQuestionNumber(score)}
+            onClick={() => props.updateQuestionNumber(index)}
             > 
-            {options[i]} 
+            {option} 
           </Button>
         </Grid>
-      )
-    }
+    )
     return (buttons);
 }
 
-// ultimately, I want to be passingin the questions and options arrays as props on the MakeQuestion calls below. 
+// shift to pass in questions and options arrays as props on the MakeQuestion calls, below, once there's more than one question setup.
 function App() {
   return (
-    <MakeQuestion />
+    // <ThemeProvider theme={theme}>
+      <MakeQuestion />
+    // </ThemeProvider>
   );
 }
 
