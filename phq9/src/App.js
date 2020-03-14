@@ -9,12 +9,16 @@ import './App.css';
 
 // To-do, code:
 // Refactor MakeQuestion, RenderOptions to accepts props of array with questions, options.
+// bold "two weeks"
 // Set up grid plug-in, chart at end
+// set up catch for suicidal answers, offer resources.
 
 // const theme = createMuiTheme{
       // implement if I wish to customize colors, etc.
 // }
+const questionsPHQ9 = ["Little interest or pleasure in doing things.", "Feeling down, depressed, or hopeless.", "Trouble falling or staying asleep, or sleeping too much.", "Feeling tired or having little energy.", "Poor appetite or overeating.", "Feeling bad about yourself - or that you are a failure or have let yourself or your family down.", "Over the last 2 weeks, how often have you had trouble concentrating on things?", "Moving or speaking so slowly that other people could've noticed? Or the opposite - being much more fidgety or restless than usual.", "Thoughts about just wanting to fall asleep and not wake up, harming yourself, or killing yourself?"]
 
+const optionsPHQ9 = ["Not at all", "Several Days", "More than half the days", "Nearly every day"];
 
 class MakeQuestion extends React.Component {
   constructor(props) {
@@ -27,16 +31,16 @@ class MakeQuestion extends React.Component {
     this.questionRenderer = this.questionRenderer.bind(this);
   }
 
-  questions = ["Little interest or pleasure in doing things.", "Feeling down, depressed, or hopeless.", "Trouble falling or staying asleep, or sleeping too much.", "Feeling tired or having little energy.", "Poor appetite or overeating.", "Feeling bad about yourself - or that you are a failure or have let yourself or your family down.", "Over the last 2 weeks, how often have you had trouble concentrating on things?", "Moving or speaking so slowly that other people could've noticed? Or the opposite - being much more fidgety or restless than usual.", "Thoughts about just wanting to fall asleep and not wake up, harming yourself, or killing yourself?"]
-  // eventually, write a function to bold "2 weeks"
+  questions = this.props.questions;
+  options = this.props.options;
 
   questionRenderer() {
     let questionNumber = this.state.questionNumber;
-    let questions = this.questions;
+    // let questions = this.questions;
     return (
       <RenderQuestions 
         questionNumber={questionNumber}
-        questions={questions}
+        questions={this.questions}
       />
     )
 
@@ -79,6 +83,7 @@ class MakeQuestion extends React.Component {
                   <this.questionRenderer />
               </Grid>
               <RenderOptions
+                options={this.options}
                 updateQuestionNumber={this.updateQuestionNumber}
                 questionNumber={this.state.questionNumber}
                 questions={this.questions}
@@ -134,8 +139,7 @@ function RenderOptions(props) {
         </Grid>
       );
     }
-    let options = ["Not at all", "Several Days", "More than half the days", "Nearly every day"];
-    let buttons = options.map( (option, index) => 
+    let buttons = props.options.map( (option, index) => 
         <Grid 
           item 
           xs={8}
@@ -160,7 +164,10 @@ function RenderOptions(props) {
 function App() {
   return (
     // <ThemeProvider theme={theme}>
-      <MakeQuestion />
+      <MakeQuestion 
+        questions={questionsPHQ9}
+        options={optionsPHQ9}
+         />
     // </ThemeProvider>
   );
 }
