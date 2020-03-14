@@ -74,6 +74,7 @@ class MakeQuestion extends React.Component {
               <Grid 
                 item 
                 xs={10}
+                md={6}
                 >
                   <this.questionRenderer />
               </Grid>
