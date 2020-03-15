@@ -1,10 +1,11 @@
 import React from 'react';
 import { Button, Grid, Typography, Paper } from '@material-ui/core';
 // import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import Chart from "react-apexcharts";
 import './App.css';
 
 //To do, UI: 
-// Add navbar with help drop-down
+// Add app bar
 // See if you can put a stepper in the navbar; if not, put it below. One step for each card.
 
 // To-do, code:
@@ -12,6 +13,7 @@ import './App.css';
 // bold "two weeks"
 // Set up grid plug-in, chart at end
 // set up catch for suicidal answers, offer resources.
+// Extract, optimize; get rid of unnecessary dependencies, republish as build version.
 
 // const theme = createMuiTheme{
       // implement if I wish to customize colors, etc.
@@ -19,6 +21,45 @@ import './App.css';
 const questionsPHQ9 = ["Little interest or pleasure in doing things.", "Feeling down, depressed, or hopeless.", "Trouble falling or staying asleep, or sleeping too much.", "Feeling tired or having little energy.", "Poor appetite or overeating.", "Feeling bad about yourself - or that you are a failure or have let yourself or your family down.", "Over the last 2 weeks, how often have you had trouble concentrating on things?", "Moving or speaking so slowly that other people could've noticed? Or the opposite - being much more fidgety or restless than usual.", "Thoughts about just wanting to fall asleep and not wake up, harming yourself, or killing yourself?"]
 
 const optionsPHQ9 = ["Not at all", "Several Days", "More than half the days", "Nearly every day"];
+
+class ResultsChart extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      options: {
+        chart: {
+          id: "basic-bar",
+          toolbar: {
+            show: false
+          }
+        },
+        xaxis: {
+          categories: ["Your Score", "Highest Possible"]
+        },
+      colors: ['#3f51b5']
+      }, 
+      series: [
+        {
+          name: "Score",
+          data: [this.props.finalScore, 27]
+        }
+      ]
+    };
+  }
+
+    render(){
+      return(
+        <Grid item xs={12}>
+          <Chart 
+            options={this.state.options}
+            series={this.state.series}
+            type="bar"
+          />
+        </Grid>
+      )
+    }
+}
 
 class MakeQuestion extends React.Component {
   constructor(props) {
@@ -132,6 +173,9 @@ function RenderOptions(props) {
           >
             Your depression score is: {finalScore}/27. This is considered to be in the {depSeverity} range.
           </Typography>
+          <ResultsChart 
+            finalScore={finalScore}
+          />
           <Typography align="center">
             Note: This assessment does not <em>diagnose</em> depression; only a trained professional can do that.
           </Typography>
