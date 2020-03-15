@@ -1,19 +1,21 @@
 import React from 'react';
-import { Button, Grid, Typography, Paper } from '@material-ui/core';
+import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper } from '@material-ui/core';
 // import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Chart from "react-apexcharts";
+import MenuIcon from '@material-ui/icons/Menu';
 import './App.css';
 
 //To do, UI: 
-// Add app bar
+// Make the app bar menu actually work.
 // See if you can put a stepper in the navbar; if not, put it below. One step for each card.
+// adjust the graph spacing so that there's not such a gap between the y index and the chart area
+// improve top spacing on chart for desktop
 
 // To-do, code:
-// Refactor MakeQuestion, RenderOptions to accepts props of array with questions, options.
 // bold "two weeks"
-// Set up grid plug-in, chart at end
 // set up catch for suicidal answers, offer resources.
 // Extract, optimize; get rid of unnecessary dependencies, republish as build version.
+
 
 // const theme = createMuiTheme{
       // implement if I wish to customize colors, etc.
@@ -103,7 +105,7 @@ class MakeQuestion extends React.Component {
       <Paper elevation={12} 
       style={{
         paddingTop:10,
-        marginTop:60,
+        marginTop:50,
         paddingBottom:160,
         marginLeft:10,
         marginRight:10
@@ -207,12 +209,26 @@ function RenderOptions(props) {
 // shift to pass in questions and options arrays as props on the MakeQuestion calls, below, once there's more than one question setup.
 function App() {
   return (
-    // <ThemeProvider theme={theme}>
+        // <ThemeProvider theme={theme}>
+    <>
+
+      <AppBar position="static">
+        <Toolbar variant="dense">
+          <IconButton edge="start" color="inherit" aria-label="menu">
+            <MenuIcon 
+              onClick={() => alert("that should do something")}
+            />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+
       <MakeQuestion 
         questions={questionsPHQ9}
         options={optionsPHQ9}
          />
-    // </ThemeProvider>
+
+   </>
+       // </ThemeProvider>
   );
 }
 
