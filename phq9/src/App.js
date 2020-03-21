@@ -5,18 +5,23 @@ import Chart from "react-apexcharts";
 import MenuIcon from '@material-ui/icons/Menu';
 import './App.css';
 
+// https://apexcharts.com/docs/react-charts/
+
 //To do, UI: 
 // Make the app bar menu actually work.
 // See if you can put a stepper in the navbar; if not, put it below. One step for each card.
 // adjust the graph spacing so that there's not such a gap between the y index and the chart area
-// improve top spacing on chart for desktop
+  // -> This seems to be much harder than expected. The elements are being positioned via a transform(translate()) property, and there doesn't seem to be an available prop to adjust their spacing relative to each other. I could try adding a custom class that targets elements having said custom class with the apex charts chart-area custom class, and put in a media query to widen it slightly on mobile.
+// implement a custom color scheme (maybe match new app, ish, or something...)
 
 // To-do, code:
 // bold "two weeks"
 // set up catch for suicidal answers, offer resources.
 // Extract, optimize; get rid of unnecessary dependencies, republish as build version.
 // For functions that rely on state binding in the constructor: rewrite as arrow functions so that they don't need explicit binding.
+// Add functionality to menu; make the option open a dialogue that explains what the PHQ9 is.
 
+// Also, finish that tutorial (maybe...?) and move on to making a React Food and Mood.
 
 // const theme = createMuiTheme{
       // implement if I wish to customize colors, etc.
@@ -32,7 +37,7 @@ class ResultsChart extends React.Component {
     this.state = {
       options: {
         chart: {
-          id: "basic-bar",
+          id: "results-chart",
           toolbar: {
             show: false
           }
