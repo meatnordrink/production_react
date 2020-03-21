@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper } from '@material-ui/core';
+import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem } from '@material-ui/core';
 // import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Chart from "react-apexcharts";
 import MenuIcon from '@material-ui/icons/Menu';
@@ -15,6 +15,7 @@ import './App.css';
 // bold "two weeks"
 // set up catch for suicidal answers, offer resources.
 // Extract, optimize; get rid of unnecessary dependencies, republish as build version.
+// For functions that rely on state binding in the constructor: rewrite as arrow functions so that they don't need explicit binding.
 
 
 // const theme = createMuiTheme{
@@ -206,21 +207,44 @@ function RenderOptions(props) {
     return (buttons);
 }
 
-// shift to pass in questions and options arrays as props on the MakeQuestion calls, below, once there's more than one question setup.
+function RenderAppBar(){
+  // set up a hook for anchorEl
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const openMenu = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const closeMenu = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <AppBar position="static">
+    <Toolbar variant="dense">
+      <IconButton edge="start" color="inherit" aria-label="menu">
+        <MenuIcon aria-controls="simple-menu" aria-haspopup="true" onClick={openMenu} />
+        <Menu
+        id="help-menu"
+        anchorEl={anchorEl}
+        keepMounted //keepMounted is a property of Modal
+        open={Boolean(anchorEl)} //exists based on the existence of anchorEl, set by openMenu and closeMenu
+        onClose={closeMenu}
+        >
+          <MenuItem onClick={closeMenu}>What is this?</MenuItem>
+      </Menu>
+      </IconButton>
+    </Toolbar>
+  </AppBar>
+  )
+}
+
 function App() {
   return (
         // <ThemeProvider theme={theme}>
     <>
 
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon 
-              onClick={() => alert("that should do something")}
-            />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+      <RenderAppBar />
 
       <MakeQuestion 
         questions={questionsPHQ9}
