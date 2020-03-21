@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem } from '@material-ui/core';
+import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle } from '@material-ui/core';
 // import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Chart from "react-apexcharts";
 import MenuIcon from '@material-ui/icons/Menu';
@@ -16,7 +16,7 @@ import './App.css';
 
 // To-do, code:
 // bold "two weeks"
-// set up catch for suicidal answers, offer resources.
+// set up catch for suicidal answers, offer resources. (Consider full-screen dialogue.)
 // Extract, optimize; get rid of unnecessary dependencies, republish as build version.
 // For functions that rely on state binding in the constructor: rewrite as arrow functions so that they don't need explicit binding.
 // Add functionality to menu; make the option open a dialogue that explains what the PHQ9 is.
@@ -215,6 +215,7 @@ function RenderOptions(props) {
 function RenderAppBar(){
   // set up a hook for anchorEl
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
 
   const openMenu = event => {
     setAnchorEl(event.currentTarget);
@@ -223,6 +224,15 @@ function RenderAppBar(){
   const closeMenu = () => {
     setAnchorEl(null);
   };
+
+  const openDialog = () => {
+    setOpen(true);
+    closeMenu();
+  }
+
+  const closeDialog = () => {
+    setOpen(false);
+  }
 
   return (
     <AppBar position="static">
@@ -236,7 +246,15 @@ function RenderAppBar(){
         open={Boolean(anchorEl)} //exists based on the existence of anchorEl, set by openMenu and closeMenu
         onClose={closeMenu}
         >
-          <MenuItem onClick={closeMenu}>What is this?</MenuItem>
+          <MenuItem onClick={openDialog}>What is this?</MenuItem>
+          <Dialog onClose={closeDialog} aria-labelledby="what-is-this" open={open}>
+              <DialogTitle id="what-is-this">What is this?</DialogTitle>
+                  <Typography 
+                  style={{paddingLeft:20, paddingRight:20, paddingBottom:20}} 
+                  >
+                      The PHQ9 is a tool for evaluating depression that has been clinically validated and is widely used by therapists. However, it's not an adequate diagnostic tool on its own. If you think you might be dealing with depression, we encourage you to consult with a quaified therapist.
+                  </Typography>
+          </Dialog>
       </Menu>
       </IconButton>
     </Toolbar>
