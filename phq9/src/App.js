@@ -1,31 +1,34 @@
 import React from 'react';
-import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle } from '@material-ui/core';
-// import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Chart from "react-apexcharts";
 import MenuIcon from '@material-ui/icons/Menu';
 import './App.css';
+import { purple } from '@material-ui/core/colors';
 
 // https://apexcharts.com/docs/react-charts/
 
 //To do, UI: 
-// Make the app bar menu actually work.
 // See if you can put a stepper in the navbar; if not, put it below. One step for each card.
 // adjust the graph spacing so that there's not such a gap between the y index and the chart area
   // -> This seems to be much harder than expected. The elements are being positioned via a transform(translate()) property, and there doesn't seem to be an available prop to adjust their spacing relative to each other. I could try adding a custom class that targets elements having said custom class with the apex charts chart-area custom class, and put in a media query to widen it slightly on mobile.
-// implement a custom color scheme (maybe match new app, ish, or something...)
+
 
 // To-do, code:
 // bold "two weeks"
-// set up catch for suicidal answers, offer resources. (Consider full-screen dialogue.)
 // Extract, optimize; get rid of unnecessary dependencies, republish as build version.
-// For functions that rely on state binding in the constructor: rewrite as arrow functions so that they don't need explicit binding.
-// Add functionality to menu; make the option open a dialogue that explains what the PHQ9 is.
+// Add option to toggle color scheme in drop-down menu.
 
 // Also, finish that tutorial (maybe...?) and move on to making a React Food and Mood.
 
-// const theme = createMuiTheme{
-      // implement if I wish to customize colors, etc.
-// }
+
+const theme = createMuiTheme({
+  palette: {
+    // primary: purple
+    // look at importing hue and defining a color matching the app's buttons. (Web buttons are currently about this color.) Until then, this is in place, and purple doesn't work bad; could add a theme toggle as an option on the menu. 
+  }
+})
+
 const questionsPHQ9 = ["Little interest or pleasure in doing things.", "Feeling down, depressed, or hopeless.", "Trouble falling or staying asleep, or sleeping too much.", "Feeling tired or having little energy.", "Poor appetite or overeating.", "Feeling bad about yourself - or that you are a failure or have let yourself or your family down.", "Over the last 2 weeks, how often have you had trouble concentrating on things?", "Moving or speaking so slowly that other people could've noticed? Or the opposite - being much more fidgety or restless than usual.", "Thoughts about just wanting to fall asleep and not wake up, harming yourself, or killing yourself?"]
 
 const optionsPHQ9 = ["Not at all", "Several Days", "More than half the days", "Nearly every day"];
@@ -74,7 +77,8 @@ class MakeQuestion extends React.Component {
     super(props);
     this.state = {
       questionNumber: 0,
-      userScore: 0
+      userScore: 0,
+      answers: []
     };
     this.updateQuestionNumber = this.updateQuestionNumber.bind(this);
     this.questionRenderer = this.questionRenderer.bind(this);
@@ -98,11 +102,14 @@ class MakeQuestion extends React.Component {
   updateQuestionNumber(score) {
     let questionNumber = this.state.questionNumber;
     let userScore = this.state.userScore;
+    let answers = this.state.answers
+    answers[questionNumber] = score
     questionNumber++;
     userScore += score;
     this.setState({
       questionNumber: questionNumber,
-      userScore: userScore
+      userScore: userScore,
+      answers: answers
     })
   }
 
@@ -137,6 +144,7 @@ class MakeQuestion extends React.Component {
                 questionNumber={this.state.questionNumber}
                 questions={this.questions}
                 userScore={this.state.userScore}
+                answers={this.state.answers}
                  />
         </Grid>
       </Paper>
@@ -156,8 +164,12 @@ function RenderQuestions(props) {
   )
  }
 function RenderOptions(props) {
+    const suicidal = props.answers[props.answers.length - 1] > 0
+
     if (props.questionNumber >= props.questions.length) {
+      const suicideWarning = suicidal ? <RenderSuicideDialog /> : null
       const finalScore = props.userScore;
+
       var depSeverity;
       if (finalScore <5) {
         depSeverity = "very mild";
@@ -174,6 +186,7 @@ function RenderOptions(props) {
       }
       return(
         <Grid item xs={10}>
+          <div>{suicideWarning}</div>
           <Typography
             variant="h6" 
             paragraph={true}
@@ -249,11 +262,24 @@ function RenderAppBar(){
           <MenuItem onClick={openDialog}>What is this?</MenuItem>
           <Dialog onClose={closeDialog} aria-labelledby="what-is-this" open={open}>
               <DialogTitle id="what-is-this">What is this?</DialogTitle>
-                  <Typography 
+              <DialogContent>
+                <DialogContentText>
+                  The PHQ9 is a tool for evaluating depression that has been clinically validated and is widely used by therapists. However, it's not an adequate diagnostic tool on its own. If you think you might be dealing with depression, we encourage you to consult with a quaified therapist.                 
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={closeDialog} color="primary">
+                  Close
+                </Button>   
+              </DialogActions>
+                  {/* <Typography 
                   style={{paddingLeft:20, paddingRight:20, paddingBottom:20}} 
                   >
                       The PHQ9 is a tool for evaluating depression that has been clinically validated and is widely used by therapists. However, it's not an adequate diagnostic tool on its own. If you think you might be dealing with depression, we encourage you to consult with a quaified therapist.
                   </Typography>
+                  <Button onClick={closeDialog} >
+                    Close
+                  </Button> */}
           </Dialog>
       </Menu>
       </IconButton>
@@ -262,20 +288,56 @@ function RenderAppBar(){
   )
 }
 
+function RenderSuicideDialog() {
+  const [open, setOpen] = React.useState(true);
+
+  const closeDialog = () => {
+    setOpen(false);
+  }
+  
+  // could include more resources below, including for trans/lgbtq teens etc.; but worry that more text will simply dilute the message. Could also attempt to make it detect country and offer the appropriate resources; not sure how reliable that is.
+  return(
+    <Dialog fullscreen onClose={closeDialog} open={open}>
+      <DialogContent>
+        <DialogContentText>
+          Suicidal thought or urges need to be taken seriously. We urge you to reach out to one of the resources below if you're feeling suicidal; there's help available <b>right now</b>.
+        </DialogContentText>
+        <DialogContentText>
+          The <a href="http://www.crisistextline.org/" rel="noopener noreferrer" target="_blank">Crisis Text Line</a> is a service that operates 24/7, works anywhere in the US, Canada, or the UK, and is for any kind of crisis. A trained crisis volunteer will respond to your text quickly (usually in under 5 minutes). 
+          <ul>
+            <li>For the US, text <b>741741</b>.</li>
+            <li>For Canada, text <b>686868</b>.</li>
+            <li>For the UK, <b>85258</b>.</li>
+          </ul>
+        </DialogContentText>
+        <DialogContentText>
+          If you're outside the US, <a href="http://befrienders.org" rel="noopener noreferrer" target="_blank">Befrienders Worldwide</a> has links to hotlines throughout the world. They'll help connect you to someone who can listen in a supportive and nonjudgmental way. Click on the link now to be connected.
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button color="primary" onClick={closeDialog}>
+          Okay
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
+}
+
 function App() {
   return (
-        // <ThemeProvider theme={theme}>
-    <>
+        // 
 
+    <ThemeProvider theme={theme}>
+    
       <RenderAppBar />
 
       <MakeQuestion 
         questions={questionsPHQ9}
         options={optionsPHQ9}
          />
+    </ThemeProvider>
 
-   </>
-       // </ThemeProvider>
+    
   );
 }
 
