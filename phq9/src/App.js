@@ -20,16 +20,17 @@ import { purple } from '@material-ui/core/colors';
 // Add option to toggle color scheme in drop-down menu.
 
 // Also, finish that tutorial (maybe...?) and move on to making a React Food and Mood.
-
+// Do Router tutorial
 
 const theme = createMuiTheme({
   palette: {
     // primary: purple
     // look at importing hue and defining a color matching the app's buttons. (Web buttons are currently about this color.) Until then, this is in place, and purple doesn't work bad; could add a theme toggle as an option on the menu. 
+    // or, make up an entire uplift-themed switch, and enable as a choice via menu. 
   }
 })
 
-const questionsPHQ9 = ["Little interest or pleasure in doing things.", "Feeling down, depressed, or hopeless.", "Trouble falling or staying asleep, or sleeping too much.", "Feeling tired or having little energy.", "Poor appetite or overeating.", "Feeling bad about yourself - or that you are a failure or have let yourself or your family down.", "Over the last 2 weeks, how often have you had trouble concentrating on things?", "Moving or speaking so slowly that other people could've noticed? Or the opposite - being much more fidgety or restless than usual.", "Thoughts about just wanting to fall asleep and not wake up, harming yourself, or killing yourself?"]
+const questionsPHQ9 = ["Little interest or pleasure in doing things.", "Feeling down, depressed, or hopeless.", "Trouble falling or staying asleep, or sleeping too much.", "Feeling tired or having little energy.", "Poor appetite or overeating.", "Feeling bad about yourself - or that you are a failure or have let yourself or your family down.", <Typography variant="h6">Over the last <em>2 weeks</em>, how often have you had trouble concentrating on things?</Typography>, "Moving or speaking so slowly that other people could've noticed? Or the opposite - being much more fidgety or restless than usual.", "Thoughts about just wanting to fall asleep and not wake up, harming yourself, or killing yourself?"]
 
 const optionsPHQ9 = ["Not at all", "Several Days", "More than half the days", "Nearly every day"];
 
@@ -221,6 +222,7 @@ function RenderOptions(props) {
             {option} 
           </Button>
         </Grid>
+      
     )
     return (buttons);
 }
