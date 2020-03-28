@@ -4,7 +4,7 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Chart from "react-apexcharts";
 import MenuIcon from '@material-ui/icons/Menu';
 import './App.css';
-//import { purple } from '@material-ui/core/colors';
+import { purple } from '@material-ui/core/colors';
 
 // https://apexcharts.com/docs/react-charts/
 
@@ -274,6 +274,14 @@ function RenderAppBar(){
                   Close
                 </Button>   
               </DialogActions>
+                  {/* <Typography 
+                  style={{paddingLeft:20, paddingRight:20, paddingBottom:20}} 
+                  >
+                      The PHQ9 is a tool for evaluating depression that has been clinically validated and is widely used by therapists. However, it's not an adequate diagnostic tool on its own. If you think you might be dealing with depression, we encourage you to consult with a quaified therapist.
+                  </Typography>
+                  <Button onClick={closeDialog} >
+                    Close
+                  </Button> */}
           </Dialog>
       </Menu>
       </IconButton>
