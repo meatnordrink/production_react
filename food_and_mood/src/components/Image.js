@@ -1,9 +1,14 @@
 import React from 'react';
 import { Card, CardMedia } from '@material-ui/core';
 
+// clean up
+
 export default function RenderImage(props) {
     return (
-        <Card>
+        <Card 
+          // variant="outlined"
+          style={{marginBottom:20}}
+          >
           {/* <CardActionArea> */}
             <CardMedia
               component="img"
@@ -11,7 +16,6 @@ export default function RenderImage(props) {
               width="100"  
               image={ props.imageAddress }
               title="image"
-              raised="false"
             />
             {/* <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
