@@ -1,3 +1,7 @@
 body {
-    background-color: rgba(221, 220, 220, 0.336);
+    /* background-color: rgba(221, 220, 220, 0.336); */
+    background-image: url(./assets/mountainBackground.png);
+    position: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
