@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
-import { ThemeProvider, createMuiTheme, useTheme } from '@material-ui/core/styles'
+import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Card, CardContent, CardActionArea, Radio, RadioGroup, SvgIcon, FormControl, FormLabel, FormControlLabel } from '@material-ui/core';
+import { ThemeProvider, createMuiTheme, useTheme, makeStyles, styled } from '@material-ui/core/styles'
 import Chart from "react-apexcharts";
 import MenuIcon from '@material-ui/icons/Menu';
 import './App.css';
-import { makeStyles } from '@material-ui/core/styles';
+import UpLiftLogo from './assets/UpLift_Logo.svg';
 //import { purple } from '@material-ui/core/colors';
 
 // https://apexcharts.com/docs/react-charts/
@@ -25,7 +25,42 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // 1. Set up some styles, in this manner:
 
+const useStyles = makeStyles({
+  root: {
+    color: 'red'
+  },
+  choiceCards: {
+    // display: 'flex',
+    width: 320,
+    // fontSize: 18,
+    // fontWeight: 700,
+    boxShadow: '0 1px 3px rgba(0,0,0,.1)',
+    borderRadius: 11
+  },
+  choiceText: {
+    fontSize: 18,
+    fontWeight: 700
+  },
+  radios: {
+    // textAlign: 'right',
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '8px 10px',
+    marginLeft: 8,
+    // marginRight: 2,
+  },
+  circle: {
+    color: '#ededed'
+  }
+});
 
+const NextButton = styled(Button)({
+  width: 320,
+  borderRadius: 11,
+  fontSize: 14,
+  marginTop: '3vw',
+  padding: 10,
+})
 
 // export default function MediaCard() {
 //   const classes = useStyles();
@@ -38,25 +73,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
-    secondary: {
-      // main: '#4791db'
-      main: '#115293'
-    },
     primary: {
-      main: '#1976d2'
+      main: '#3cb4d3'
     }
   }
 })
 
-// This style is mainly just a proof of concept; I like it better as all just primary.
-const useStyles = makeStyles({
-  appBar: {
-    backgroundColor: theme.palette.primary.light,
-  },
-
-});
-
-const questionsPHQ9 = ["Little interest or pleasure in doing things.", "Feeling down, depressed, or hopeless.", "Trouble falling or staying asleep, or sleeping too much.", "Feeling tired or having little energy.", "Poor appetite or overeating.", "Feeling bad about yourself - or that you are a failure or have let yourself or your family down.", <Typography variant="h6">Over the last <em>2 weeks</em>, how often have you had trouble concentrating on things?</Typography>, "Moving or speaking so slowly that other people could've noticed? Or the opposite - being much more fidgety or restless than usual.", "Thoughts about just wanting to fall asleep and not wake up, harming yourself, or killing yourself?"]
+const questionsPHQ9 = ["Little interest or pleasure in doing things?", "Feeling down, depressed, or hopeless.", "Trouble falling or staying asleep, or sleeping too much.", "Feeling tired or having little energy.", "Poor appetite or overeating.", "Feeling bad about yourself - or that you are a failure or have let yourself or your family down.", <Typography variant="h6">Over the last <em>2 weeks</em>, how often have you had trouble concentrating on things?</Typography>, "Moving or speaking so slowly that other people could've noticed? Or the opposite - being much more fidgety or restless than usual.", "Thoughts about just wanting to fall asleep and not wake up, harming yourself, or killing yourself?"]
 
 const optionsPHQ9 = ["Not at all", "Several Days", "More than half the days", "Nearly every day"];
 
@@ -75,7 +98,7 @@ class ResultsChart extends React.Component {
         xaxis: {
           categories: ["Your Score", "Highest Possible"]
         },
-      colors: ['#3f51b5']
+      colors: ['#3cb4d3']
       }, 
       series: [
         {
@@ -142,27 +165,29 @@ class MakeQuestion extends React.Component {
 
   render(){
     return(
-      <Paper elevation={12} 
-      style={{
-        paddingTop:10,
-        marginTop:50,
-        paddingBottom:160,
-        marginLeft:10,
-        marginRight:10
-        }}>
+      // <Paper elevation={12} 
+      // style={{
+      //   paddingTop:10,
+      //   marginTop:50,
+      //   paddingBottom:160,
+      //   marginLeft:10,
+      //   marginRight:10
+      //   }}>
         <Grid 
           container
           spacing={1}
           direction="column" 
           justify="center"
           alignItems="center"
-          style={{marginTop:100}}
+          style={{marginTop:30}}
           >
+            
               <Grid 
                 item 
                 xs={10}
                 md={6}
                 >
+                  <Typography variant="body1" align="left" paragraph="true">Over the last <b>two weeks</b>, how often have you been bothered by ...</Typography>
                   <this.questionRenderer />
               </Grid>
               <RenderOptions
@@ -173,17 +198,17 @@ class MakeQuestion extends React.Component {
                 userScore={this.state.userScore}
                 answers={this.state.answers}
                  />
+             <NextButton color="primary" variant="contained" onClick={() => this.updateQuestionNumber(1)}>Next</NextButton>
         </Grid>
-      </Paper>
+      // </Paper>  // UPDATEQUESTIONNUMBER, ABOVE, NEEDS TO BE REFACTORED
     )
   }
 }
 function RenderQuestions(props) {
   return(
   <Typography 
-    variant="h6" 
-    gutterBottom={true}
-    align="center"
+    variant="h5" 
+    paragraph={true}
     // style={{width:360}}
     >
       {props.questions[props.questionNumber]} 
@@ -191,6 +216,12 @@ function RenderQuestions(props) {
   )
  }
 function RenderOptions(props) {
+    const classes = useStyles();
+    const [value, setValue] = React.useState('disabled');
+    const handleChange = (event) => {
+      setValue(event.target.value);
+    };
+
     const suicidal = props.answers[props.answers.length - 1] > 0
 
     if (props.questionNumber >= props.questions.length) {
@@ -234,19 +265,26 @@ function RenderOptions(props) {
     let buttons = props.options.map( (option, index) => 
         <Grid 
           item 
-          xs={8}
+          xs={12}
           key={option}
+          style={{padding:8}}
           >
-          <Button 
-            variant="contained" 
-            size="large"
-            color="primary"
-            // fullWidth="true"
-            style={{width:200}}
-            onClick={() => props.updateQuestionNumber(index)}
-            > 
-            {option} 
-          </Button>
+          <Card className={classes.choiceCards}>
+            {/* <CardContent className={classes.choiceCardText}>
+              {option}
+            </CardContent>
+            <CardActionArea className={classes.radios}>
+              <Radio
+                color="primary"
+                className={classes.circle} 
+                // onChange={() => props.updateQuestionNumber(index)} this needs to just update their score.
+              />
+            </CardActionArea> */}
+              {/* <FormLabel component="legend">{option}</FormLabel> */}
+              <RadioGroup color="primary" className={classes.choiceCards} value={value} onChange={handleChange}>
+                <FormControlLabel className={classes.radios} value={option} control={<Radio color="primary" className={classes.circle}/>} label={<Typography className={classes.choiceText}>{option}</Typography>} labelPlacement="start" />
+              </RadioGroup>
+          </Card>
         </Grid>
       
     )
@@ -276,12 +314,17 @@ function RenderAppBar(){
   }
 
   const theme = useTheme();
-  const classes = useStyles();
+
+  //I'd much prefer the icon below wrapped in SvgIcon, but it's refusing to import it. I believe it's an issue with webpack. https://material-ui.com/components/icons/#material-icons
   return (
 
-    <AppBar className={classes.appBar} position="static">
+    <AppBar color="transparent" elevation="0" position="static">
     <Toolbar variant="dense">
-      <IconButton edge="start" aria-label="menu">
+      <span>
+        <img style={{width:80, marginTop:10}} src={require('./assets/UpLift_Logo.svg')} />
+      </span>
+
+      {/* <IconButton edge="start" aria-label="menu">
         <MenuIcon aria-controls="simple-menu" aria-haspopup="true" onClick={openMenu} />
         <Menu
         id="help-menu"
@@ -305,7 +348,7 @@ function RenderAppBar(){
               </DialogActions>
           </Dialog>
       </Menu>
-      </IconButton>
+      </IconButton> */}
     </Toolbar>
   </AppBar>
   )
