@@ -132,6 +132,7 @@ class MakeQuestion extends React.Component {
     };
     this.updateQuestionNumber = this.updateQuestionNumber.bind(this);
     this.questionRenderer = this.questionRenderer.bind(this);
+    this.updateScore = this.updateScore.bind(this);
   }
 
   questions = this.props.questions;
@@ -149,15 +150,21 @@ class MakeQuestion extends React.Component {
 
   }
 
-  updateQuestionNumber(score) {
+  updateQuestionNumber() {
+    let questionNumber = this.state.questionNumber;
+    questionNumber++;
+    this.setState({
+      questionNumber: questionNumber,
+    })
+  }
+
+  updateScore(score) {
     let questionNumber = this.state.questionNumber;
     let userScore = this.state.userScore;
     let answers = this.state.answers
     answers[questionNumber] = score
-    questionNumber++;
     userScore += score;
     this.setState({
-      questionNumber: questionNumber,
       userScore: userScore,
       answers: answers
     })
@@ -193,6 +200,7 @@ class MakeQuestion extends React.Component {
               <RenderOptions
                 options={this.options}
                 updateQuestionNumber={this.updateQuestionNumber}
+                updateScore={this.updateScore}
                 questionNumber={this.state.questionNumber}
                 questions={this.questions}
                 userScore={this.state.userScore}
@@ -218,9 +226,18 @@ function RenderQuestions(props) {
 function RenderOptions(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState('disabled');
-    const handleChange = (event) => {
+    const handleChange = (event, callback) => {
       setValue(event.target.value);
     };
+    // https://stackoverflow.com/questions/54954091/how-to-use-callback-with-usestate-hook-in-react
+    const updateScore = (score) => {
+      props.updateScore(score)
+    }
+
+    const onRadio = (event) => {
+      handleChange(event.target.value);
+      updateScore(event.target.index);
+    }
 
     const suicidal = props.answers[props.answers.length - 1] > 0
 
@@ -281,14 +298,17 @@ function RenderOptions(props) {
               />
             </CardActionArea> */}
               {/* <FormLabel component="legend">{option}</FormLabel> */}
-              <RadioGroup color="primary" className={classes.choiceCards} value={value} onChange={handleChange}>
-                <FormControlLabel className={classes.radios} value={option} control={<Radio color="primary" className={classes.circle}/>} label={<Typography className={classes.choiceText}>{option}</Typography>} labelPlacement="start" />
+              <RadioGroup color="primary" className={classes.choiceCards} number={index} value={value} onChange={() => updateScore(index), handleChange}>
+              {/* Not sure why I can't set the value below to index... */}
+                <FormControlLabel className={classes.radios} number={index} value={option} control={<Radio color="primary" className={classes.circle}/>} label={<Typography className={classes.choiceText}>{option}</Typography>} labelPlacement="start" />
               </RadioGroup>
           </Card>
         </Grid>
       
     )
-    return (buttons);
+    return (
+      buttons
+      );
 }
 
 function RenderAppBar(){
