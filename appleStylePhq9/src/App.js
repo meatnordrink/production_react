@@ -132,6 +132,7 @@ class MakeQuestion extends React.Component {
     };
     this.updateQuestionNumber = this.updateQuestionNumber.bind(this);
     this.questionRenderer = this.questionRenderer.bind(this);
+    //this.updateScore = this.updateScore.bind(this);
   }
 
   questions = this.props.questions;
@@ -162,6 +163,26 @@ class MakeQuestion extends React.Component {
       answers: answers
     })
   }
+
+  // updateQuestionNumber() {
+  //   let questionNumber = this.state.questionNumber;
+  //   questionNumber++;
+  //   this.setState({
+  //     questionNumber: questionNumber,
+  //   })
+  // }
+
+  // updateScore(score) {
+  //   let questionNumber = this.state.questionNumber;
+  //   let userScore = this.state.userScore;
+  //   let answers = this.state.answers;
+  //   answers[questionNumber] = score
+  //   userScore += score;
+  //   this.setState({
+  //       userScore: userScore,
+  //       answers: answers
+  //   })
+  // }
 
   render(){
     return(
@@ -198,9 +219,9 @@ class MakeQuestion extends React.Component {
                 userScore={this.state.userScore}
                 answers={this.state.answers}
                  />
-             <NextButton color="primary" variant="contained" onClick={() => this.updateQuestionNumber(1)}>Next</NextButton>
+             
         </Grid>
-      // </Paper>  // UPDATEQUESTIONNUMBER, ABOVE, NEEDS TO BE REFACTORED
+      // </Paper> <NextButton color="primary" variant="contained" onClick={() => this.updateQuestionNumber()}>Next</NextButton> 
     )
   }
 }
@@ -217,9 +238,13 @@ function RenderQuestions(props) {
  }
 function RenderOptions(props) {
     const classes = useStyles();
+
+    // hook to make the radio selection work. 
     const [value, setValue] = React.useState('disabled');
+    const [score, setScore] = React.useState(0)
     const handleChange = (event) => {
       setValue(event.target.value);
+      setScore(event.target.index);
     };
 
     const suicidal = props.answers[props.answers.length - 1] > 0
@@ -282,13 +307,19 @@ function RenderOptions(props) {
             </CardActionArea> */}
               {/* <FormLabel component="legend">{option}</FormLabel> */}
               <RadioGroup color="primary" className={classes.choiceCards} value={value} onChange={handleChange}>
-                <FormControlLabel className={classes.radios} value={option} control={<Radio color="primary" className={classes.circle}/>} label={<Typography className={classes.choiceText}>{option}</Typography>} labelPlacement="start" />
+                {/*RadioGroup will highlight the child whose value matches it's value. I think. I don't understand why I can't change value={option} below to value]{index} */}
+                <FormControlLabel className={classes.radios} index={index} value={option} control={<Radio color="primary" className={classes.circle}/>} label={<Typography className={classes.choiceText}>{option}</Typography>} labelPlacement="start" />
               </RadioGroup>
           </Card>
         </Grid>
       
     )
-    return (buttons);
+    return (
+      <>
+        {buttons}
+        <NextButton color="primary" variant="contained" onClick={() => props.updateQuestionNumber(score)}>Next</NextButton>
+      </>
+      );
 }
 
 function RenderAppBar(){
