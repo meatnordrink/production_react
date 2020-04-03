@@ -170,6 +170,26 @@ class MakeQuestion extends React.Component {
     })
   }
 
+  // updateQuestionNumber() {
+  //   let questionNumber = this.state.questionNumber;
+  //   questionNumber++;
+  //   this.setState({
+  //     questionNumber: questionNumber,
+  //   })
+  // }
+
+  // updateScore(score) {
+  //   let questionNumber = this.state.questionNumber;
+  //   let userScore = this.state.userScore;
+  //   let answers = this.state.answers;
+  //   answers[questionNumber] = score
+  //   userScore += score;
+  //   this.setState({
+  //       userScore: userScore,
+  //       answers: answers
+  //   })
+  // }
+
   render(){
     return(
       // <Paper elevation={12} 
@@ -206,9 +226,9 @@ class MakeQuestion extends React.Component {
                 userScore={this.state.userScore}
                 answers={this.state.answers}
                  />
-             <NextButton color="primary" variant="contained" onClick={() => this.updateQuestionNumber(1)}>Next</NextButton>
+             <NextButton color="primary" variant="contained" onClick={() => this.updateQuestionNumber()}>Next</NextButton>
         </Grid>
-      // </Paper>  // UPDATEQUESTIONNUMBER, ABOVE, NEEDS TO BE REFACTORED
+      // </Paper>  
     )
   }
 }
@@ -225,13 +245,16 @@ function RenderQuestions(props) {
  }
 function RenderOptions(props) {
     const classes = useStyles();
+
+    // hook to make the radio selection work. 
     const [value, setValue] = React.useState('disabled');
-    const handleChange = (event, callback) => {
+    const handleChange = (event) => {
       setValue(event.target.value);
     };
     // https://stackoverflow.com/questions/54954091/how-to-use-callback-with-usestate-hook-in-react
-    const updateScore = (score) => {
-      props.updateScore(score)
+    const updateScore = (score, event) => {
+      props.updateScore(score);
+      handleChange(event)
     }
 
     const onRadio = (event) => {
@@ -298,7 +321,7 @@ function RenderOptions(props) {
               />
             </CardActionArea> */}
               {/* <FormLabel component="legend">{option}</FormLabel> */}
-              <RadioGroup color="primary" className={classes.choiceCards} number={index} value={value} onChange={() => updateScore(index), handleChange}>
+              <RadioGroup color="primary" className={classes.choiceCards} number={index} value={value} onChange={(e) => updateScore(index, e)}>
               {/* Not sure why I can't set the value below to index... */}
                 <FormControlLabel className={classes.radios} number={index} value={option} control={<Radio color="primary" className={classes.circle}/>} label={<Typography className={classes.choiceText}>{option}</Typography>} labelPlacement="start" />
               </RadioGroup>
