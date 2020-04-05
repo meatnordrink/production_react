@@ -8,7 +8,7 @@ export default function RenderButton(props) {
         variant="contained" 
         size="large"
         color="primary"
-        onClick={() => props.onClick(props.pageNumber)}
+        onClick={() => props.onClick(props.nextPage)}
         > 
         {props.text} 
       </Button>
