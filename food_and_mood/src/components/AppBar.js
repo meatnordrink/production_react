@@ -3,7 +3,7 @@ import { Button, AppBar, Toolbar, IconButton, Menu, MenuItem, Dialog, DialogTitl
 import MenuIcon from '@material-ui/icons/Menu';
 
 export default function RenderAppBar(){
-    // set up a hook for anchorEl
+    // set up a hook for anchor element
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [open, setOpen] = React.useState(false);
   

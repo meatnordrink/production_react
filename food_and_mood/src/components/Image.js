@@ -1,15 +1,19 @@
 import React from 'react';
-import { Card, CardMedia } from '@material-ui/core';
+import { Card, CardMedia, makeStyles } from '@material-ui/core';
 
-// clean up
+const useStyles = makeStyles({
+  softShadow: {
+    boxShadow: '0 1px 3px rgba(0,0,0,.1)',
+    marginBottom: 20
+  }
+})
 
 export default function RenderImage(props) {
+    let classes = useStyles();
     return (
         <Card 
-          // variant="outlined"
-          style={{marginBottom:20}}
+          className={classes.softShadow}
           >
-          {/* <CardActionArea> */}
             <CardMedia
               component="img"
               height="140"
@@ -17,24 +21,6 @@ export default function RenderImage(props) {
               image={ props.imageAddress }
               title="image"
             />
-            {/* <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                Lizard
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                across all continents except Antarctica
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary">
-              Share
-            </Button>
-            <Button size="small" color="primary">
-              Learn More
-            </Button>
-          </CardActions> */}
         </Card>
       );    
 }

@@ -16,14 +16,13 @@ import UpLiftLogo from './assets/UpLift_Logo.svg';
 
 
 // To-do, code:
-// bold "two weeks"
 // Extract, optimize; get rid of unnecessary dependencies, republish as build version.
 // Add option to toggle color scheme in drop-down menu.
 
 // Also, finish that tutorial (maybe...?) and move on to making a React Food and Mood.
 // Do Router tutorial
 
-// 1. Set up some styles, in this manner:
+// https://www.apple.com/covid19/
 
 const useStyles = makeStyles({
   root: {

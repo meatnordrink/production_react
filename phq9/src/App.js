@@ -20,22 +20,6 @@ import { makeStyles } from '@material-ui/core/styles';
 // Extract, optimize; get rid of unnecessary dependencies, republish as build version.
 // Add option to toggle color scheme in drop-down menu.
 
-// Also, finish that tutorial (maybe...?) and move on to making a React Food and Mood.
-// Do Router tutorial
-
-// 1. Set up some styles, in this manner:
-
-
-
-// export default function MediaCard() {
-//   const classes = useStyles();
-
-//   return (
-//     <Card className={classes.root}>
-//       <CardActionArea>
-//         <CardMedia
-//           className={classes.media}
-
 const theme = createMuiTheme({
   palette: {
     secondary: {

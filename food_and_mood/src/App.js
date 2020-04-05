@@ -4,8 +4,9 @@ import RenderAppBar from './components/AppBar.js'
 import RenderPaper from './components/Paper.js'
 import RenderImage from './components/Image.js'
 import RenderButton from './components/Button.js'
+import RenderButtonGroup from './components/ButtonGroup'
 import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
-// import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles'
 // import Chart from "react-apexcharts";
 import MenuIcon from '@material-ui/icons/Menu';
 import './App.css';
@@ -13,27 +14,40 @@ import './App.css';
 //import './App.css';
 // import { purple } from '@material-ui/core/colors';
 
+  // just keeping this as an example for setting up the router, as it did work well for that...
+  // function choice() {
+  //   return(
+  //     <Router>
+  //         <Button component={Link} to="/two" variant="contained" color="primary">
+  //           Explore
+  //         </Button>
+  //       <Route exact path="/two">
+  //         <PageTwo />
+  //       </Route>
+  //     </Router>
+  //   )
+  // }
 
-// 1. Set up some styles, in this manner:
+//_________________________________
+//        TO-DO:
+// * Go through errors in console, see if any are worth looking into.
+// * Put in a simple router, see how that goes. Look at whether state can be saved when hopping between screens. 
+// * Make a theme-change feature to put in the menu.
+//_________________________________
 
-// import { makeStyles } from '@material-ui/core/styles';
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#4791db'
+    }
+  }
+})
+
 // const useStyles = makeStyles({
 //   root: {
-//     maxWidth: 345,
-//   },
-//   media: {
-//     height: 140,
-//   },
-// });
 
-// export default function MediaCard() {
-//   const classes = useStyles();
-
-//   return (
-//     <Card className={classes.root}>
-//       <CardActionArea>
-//         <CardMedia
-//           className={classes.media}
+//   }
+// })
 
 class Screen extends React.Component{
   constructor(props){
@@ -44,9 +58,10 @@ class Screen extends React.Component{
     this.updatePage = this.updatePage.bind(this);
   }
 
-  updatePage() {
+  updatePage(pageNumber) {
     let page = this.state.page;
-    page++;
+    // page++;
+    page = pageNumber;
     this.setState({
       page: page
     })
@@ -82,24 +97,11 @@ function PageOne(props) {
       <RenderButton
         text="Explore"
         onClick={props.handleClick}
+        pageNumber={1}
       />
     )
   }
   
-  // just keeping this as an example for setting up the router, as it did work well for that...
-  // function choice() {
-  //   return(
-  //     <Router>
-  //         <Button component={Link} to="/two" variant="contained" color="primary">
-  //           Explore
-  //         </Button>
-  //       <Route exact path="/two">
-  //         <PageTwo />
-  //       </Route>
-  //     </Router>
-  //   )
-  // }
-
   return(
     <RenderPaper
       imageAddress={require('./assets/fruit_heart_jamie-street-unsplash.jpg')}
@@ -110,13 +112,34 @@ function PageOne(props) {
 }
 
 function PageTwo(props) {
-  let text = ["Even smaller and specific changes have been found to have significant impact."]
+  const text = ["Even smaller and specific changes have been found to have significant impact.", <Typography>Check out a few of the sections below, and see if any of the ideas seem like they'd be good for <b>you</b>.</Typography>]
+  // const food = () => {
+  //   alert('Food!');
+  // };
+  // const vitD = () => {
+  //   alert('D!')
+  // }
+  // const booze = () => {
+  //   alert('booze!')
+  // }
+  // const smokes = () => {
+  //   alert('smokes!')
+  // }
+
+  // const options = ["Food", "Vitamin D", "Alcohol", "Cigarettes"]
+  // const optionFunctions = [() => alert('food'), () => alert('vitamins!'), booze, smokes]
+  
 
   function choice() {
     return(
+      // <RenderButtonGroup
+      //   options={options}
+      //   optionFunctions={optionFunctions}
+      // />
       <RenderButton
-        text="Placeholder"
-        onClick={() => alert('Hi')}
+        text="Explore"
+        onClick={props.handleClick}
+        pageNumber={0}
       />
     )
   }
@@ -136,14 +159,12 @@ function PageTwo(props) {
 
 function App() {
   return (
-        // 
-    // <ThemeProvider theme={theme}>
-    <>
-    
+        
+    <ThemeProvider theme={theme}>
+   
       <RenderAppBar />
       <Screen />
-    </>
-    // </ThemeProvider>
+    </ThemeProvider>
 
     
   );

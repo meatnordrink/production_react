@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button, Card, CardMedia, CardActionArea, Grid, Typography, Paper } from '@material-ui/core';
+import { Grid, Typography, Paper, } from '@material-ui/core';
 import RenderImage from './Image'
 
+
 export default function RenderPaper(props){
- 
+
   function RenderText() {
     let text = props.text.map( (text, index) => 
       <Typography paragraph="true" key={index}>
@@ -14,9 +15,6 @@ export default function RenderPaper(props){
   }
 
   const RenderChoice = props.choice
-
-
-    // const renderQuestion = () => props.questionMaker
 
   return(
     <Paper elevation={12} 
@@ -36,22 +34,11 @@ export default function RenderPaper(props){
         style={{marginTop:30}}
         >
 
-            <Grid item xs={10} md={6}
-            >
-              <RenderImage 
-                imageAddress={props.imageAddress}
-              />
+            <Grid item xs={10} md={6}>
+              <RenderImage imageAddress={props.imageAddress}/>
               <RenderText />
             </Grid>
               <RenderChoice />
-            {/* <RenderOptions
-              options={this.options}
-              updateQuestionNumber={this.updateQuestionNumber}
-              questionNumber={this.state.questionNumber}
-              questions={this.questions}
-              userScore={this.state.userScore}
-              answers={this.state.answers}
-                /> */}
       </Grid>
     </Paper>
   )
