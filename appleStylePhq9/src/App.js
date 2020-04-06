@@ -9,18 +9,7 @@ import UpLiftLogo from './assets/UpLift_Logo.svg';
 
 // https://apexcharts.com/docs/react-charts/
 
-//To do, UI: 
-// See if you can put a stepper in the navbar; if not, put it below. One step for each card.
-// adjust the graph spacing so that there's not such a gap between the y index and the chart area
-  // -> This seems to be much harder than expected. The elements are being positioned via a transform(translate()) property, and there doesn't seem to be an available prop to adjust their spacing relative to each other. I could try adding a custom class that targets elements having said custom class with the apex charts chart-area custom class, and put in a media query to widen it slightly on mobile.
-
-
-// To-do, code:
-// Extract, optimize; get rid of unnecessary dependencies, republish as build version.
-// Add option to toggle color scheme in drop-down menu.
-
-// Also, finish that tutorial (maybe...?) and move on to making a React Food and Mood.
-// Do Router tutorial
+//To do
 
 // https://www.apple.com/covid19/
 
@@ -78,7 +67,7 @@ const theme = createMuiTheme({
   }
 })
 
-const questionsPHQ9 = ["Little interest or pleasure in doing things?", "Feeling down, depressed, or hopeless.", "Trouble falling or staying asleep, or sleeping too much.", "Feeling tired or having little energy.", "Poor appetite or overeating.", "Feeling bad about yourself - or that you are a failure or have let yourself or your family down.", <Typography variant="h6">Over the last <em>2 weeks</em>, how often have you had trouble concentrating on things?</Typography>, "Moving or speaking so slowly that other people could've noticed? Or the opposite - being much more fidgety or restless than usual.", "Thoughts about just wanting to fall asleep and not wake up, harming yourself, or killing yourself?"]
+const questionsPHQ9 = ["Little interest or pleasure in doing things?", "Feeling down, depressed, or hopeless.", "Trouble falling or staying asleep, or sleeping too much.", "Feeling tired or having little energy.", "Poor appetite or overeating.", "Feeling bad about yourself - or that you are a failure or have let yourself or your family down.", <Typography variant="h5">Over the last <em>2 weeks</em>, how often have you had trouble concentrating on things?</Typography>, "Moving or speaking so slowly that other people could've noticed? Or the opposite - being much more fidgety or restless than usual.", "Thoughts about just wanting to fall asleep and not wake up, harming yourself, or killing yourself?"]
 
 const optionsPHQ9 = ["Not at all", "Several Days", "More than half the days", "Nearly every day"];
 
@@ -127,7 +116,8 @@ class MakeQuestion extends React.Component {
     this.state = {
       questionNumber: 0,
       userScore: 0,
-      answers: []
+      answers: [],
+      disabled: 'true'
     };
     this.updateQuestionNumber = this.updateQuestionNumber.bind(this);
     this.questionRenderer = this.questionRenderer.bind(this);
@@ -151,21 +141,27 @@ class MakeQuestion extends React.Component {
 
   updateQuestionNumber() {
     let questionNumber = this.state.questionNumber;
+    let disabled = this.state.disabled;
     questionNumber++;
+    disabled = !disabled;
     this.setState({
       questionNumber: questionNumber,
+      disabled: disabled
     })
   }
 
   updateScore(score) {
     let questionNumber = this.state.questionNumber;
     let userScore = this.state.userScore;
-    let answers = this.state.answers
+    let answers = this.state.answers;
+    let disabled = this.state.disabled;
     answers[questionNumber] = score
     userScore += score;
+    disabled = !disabled;
     this.setState({
       userScore: userScore,
-      answers: answers
+      answers: answers,
+      disabled: disabled
     })
   }
 
@@ -211,7 +207,8 @@ class MakeQuestion extends React.Component {
               <Grid 
                 item 
                 xs={10}
-                md={6}
+                md={5}
+                lg={4}
                 >
                   <Typography variant="body1" align="left" paragraph="true">Over the last <b>two weeks</b>, how often have you been bothered by ...</Typography>
                   <this.questionRenderer />
@@ -225,7 +222,14 @@ class MakeQuestion extends React.Component {
                 userScore={this.state.userScore}
                 answers={this.state.answers}
                  />
-             <NextButton color="primary" variant="contained" onClick={() => this.updateQuestionNumber()}>Next</NextButton>
+             <NextButton 
+              color="primary" 
+              variant="contained" 
+              onClick={() => this.updateQuestionNumber()}
+              disabled={this.state.disabled}
+              >
+                Next
+              </NextButton>
         </Grid>
       // </Paper>  
     )
@@ -254,11 +258,6 @@ function RenderOptions(props) {
     const updateScore = (score, event) => {
       props.updateScore(score);
       handleChange(event)
-    }
-
-    const onRadio = (event) => {
-      handleChange(event.target.value);
-      updateScore(event.target.index);
     }
 
     const suicidal = props.answers[props.answers.length - 1] > 0
