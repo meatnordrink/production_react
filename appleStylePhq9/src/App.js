@@ -117,7 +117,8 @@ class MakeQuestion extends React.Component {
       questionNumber: 0,
       userScore: 0,
       answers: [],
-      disabled: 'true'
+      disabled: true,
+      value: 'disabled'
     };
     this.updateQuestionNumber = this.updateQuestionNumber.bind(this);
     this.questionRenderer = this.questionRenderer.bind(this);
@@ -142,26 +143,33 @@ class MakeQuestion extends React.Component {
   updateQuestionNumber() {
     let questionNumber = this.state.questionNumber;
     let disabled = this.state.disabled;
+    let value = this.state.value;
     questionNumber++;
     disabled = !disabled;
+    value = 'disabled'
     this.setState({
       questionNumber: questionNumber,
-      disabled: disabled
+      disabled: disabled,
+      value: value
     })
   }
 
-  updateScore(score) {
+  updateScore(score, optionValue) {
     let questionNumber = this.state.questionNumber;
     let userScore = this.state.userScore;
     let answers = this.state.answers;
     let disabled = this.state.disabled;
+    let value = this.state.value;
+    // let value = optionValue;
     answers[questionNumber] = score
     userScore += score;
     disabled = !disabled;
+    value = optionValue;
     this.setState({
       userScore: userScore,
       answers: answers,
-      disabled: disabled
+      disabled: disabled, 
+      value: value
     })
   }
 
@@ -221,6 +229,7 @@ class MakeQuestion extends React.Component {
                 questions={this.questions}
                 userScore={this.state.userScore}
                 answers={this.state.answers}
+                value={this.state.value}
                  />
              <NextButton 
               color="primary" 
@@ -248,16 +257,21 @@ function RenderQuestions(props) {
  }
 function RenderOptions(props) {
     const classes = useStyles();
-
+    let value = props.value;
     // hook to make the radio selection work. 
-    const [value, setValue] = React.useState('disabled');
+    // const [value, setValue] = React.useState('disabled');
+
     const handleChange = (event) => {
-      setValue(event.target.value);
-    };
-    // https://stackoverflow.com/questions/54954091/how-to-use-callback-with-usestate-hook-in-react
+      value = event.target.value;
+    }
+
+    // const handleChange = (event) => {
+    //   setValue(event.target.value);
+    // };
+
     const updateScore = (score, event) => {
-      props.updateScore(score);
-      handleChange(event)
+      props.updateScore(score, event.target.value);
+      handleChange(event);
     }
 
     const suicidal = props.answers[props.answers.length - 1] > 0
@@ -320,6 +334,7 @@ function RenderOptions(props) {
             </CardActionArea> */}
               {/* <FormLabel component="legend">{option}</FormLabel> */}
               <RadioGroup color="primary" className={classes.choiceCards} number={index} value={value} onChange={(e) => updateScore(index, e)}>
+              {/* <RadioGroup color="primary" className={classes.choiceCards} number={index} value={value} onChange={setValue}> */}
               {/* Not sure why I can't set the value below to index... */}
                 <FormControlLabel className={classes.radios} number={index} value={option} control={<Radio color="primary" className={classes.circle}/>} label={<Typography className={classes.choiceText}>{option}</Typography>} labelPlacement="start" />
               </RadioGroup>
@@ -404,7 +419,7 @@ function RenderSuicideDialog() {
   
   // could include more resources below, including for trans/lgbtq teens etc.; but worry that more text will simply dilute the message. Could also attempt to make it detect country and offer the appropriate resources; not sure how reliable that is.
   return(
-    <Dialog fullscreen onClose={closeDialog} open={open}>
+    <Dialog fullscreen="true" onClose={closeDialog} open={open}>
       <DialogContent>
         <DialogContentText>
           Suicidal thought or urges need to be taken seriously. We urge you to reach out to one of the resources below if you're feeling suicidal; there's help available <b>right now</b>.
