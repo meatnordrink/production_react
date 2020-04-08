@@ -42,7 +42,7 @@ const otherStyles = makeStyles({
 })
 
 export default function(props) {
-    const styleProps = { transform: 'translate(-210px)'}
+    const styleProps = { transform: `translate(${props.grade}px)`}
     let classes = otherStyles(styleProps);
     let styleToUse = classes.circle;
      const [radioStyle, setStyle] = React.useState(styleToUse)
