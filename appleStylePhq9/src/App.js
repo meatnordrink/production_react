@@ -139,7 +139,7 @@ class MakeQuestion extends React.Component {
         <Typography variant="body1" align="left" paragraph="true">Over the last <b>two weeks</b>, how often have you been bothered by ...</Typography>
         }
         {questionNumber = 9 && 
-          <LinearGauge />
+          <LinearGauge message="Hey dumbass!"/>
         }
         </div>
 
