@@ -11,6 +11,7 @@ import UpLiftLogo from './assets/UpLift_Logo.svg';
 // https://apexcharts.com/docs/react-charts/
 
 //To do
+// * replace all the 8px paddings around radio buttons, text with some universal style
 
 // https://www.apple.com/covid19/
 
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
   },
   choiceCards: {
     // display: 'flex',
-    width: 320,
+    // width: '60vw',
     // fontSize: 18,
     // fontWeight: 700,
     boxShadow: '0 1px 3px rgba(0,0,0,.1)',
@@ -132,15 +133,32 @@ class MakeQuestion extends React.Component {
 
   maintainRenderer() {
     let questionNumber = this.state.questionNumber;
+    let questionsDone = questionNumber < 9;
+    // let userScore = this.state.userScore;
+    // if (userScore < 5){
+
+    // } else if (userScore < 9) {
+
+    // } else if (userScore < 15) {
+
+    // } else if (userScore < 20) {
+
+    // } else {
+
+    // }
 
       return(
         <div>
-        {questionNumber < 9 && 
+          {questionsDone
+            ? <Typography variant="body1" align="left" paragraph="true" style={{padding:'0px 8px'}}>Over the last <b>two weeks</b>, how often have you been bothered by ...</Typography>
+            : null
+          }
+        {/* {questionNumber < 9 && 
         <Typography variant="body1" align="left" paragraph="true">Over the last <b>two weeks</b>, how often have you been bothered by ...</Typography>
         }
         {questionNumber = 9 && 
-          <LinearGauge grade='-210'/>
-        }
+          <LinearGauge grade='-185'/>
+        } */}
         </div>
 
       )
@@ -238,23 +256,40 @@ class MakeQuestion extends React.Component {
             
               <Grid 
                 item 
-                xs={10}
+                xs={12}
                 md={5}
-                lg={4}
+                lg={6}
                 >
                   <this.maintainRenderer />
                   <this.questionRenderer />
-              </Grid>
-              <RenderOptions
-                options={this.options}
-                updateQuestionNumber={this.updateQuestionNumber}
-                updateScore={this.updateScore}
-                questionNumber={this.state.questionNumber}
-                questions={this.questions}
-                userScore={this.state.userScore}
-                answers={this.state.answers}
-                value={this.state.value}
+                  <RenderOptions
+                  options={this.options}
+                  updateQuestionNumber={this.updateQuestionNumber}
+                  updateScore={this.updateScore}
+                  questionNumber={this.state.questionNumber}
+                  questions={this.questions}
+                  userScore={this.state.userScore}
+                  answers={this.state.answers}
+                  value={this.state.value}
                  />
+              </Grid>
+              {/* <Grid
+                item 
+                xs={12}
+                md={6}
+                lg={5}
+              >
+                <RenderOptions
+                  options={this.options}
+                  updateQuestionNumber={this.updateQuestionNumber}
+                  updateScore={this.updateScore}
+                  questionNumber={this.state.questionNumber}
+                  questions={this.questions}
+                  userScore={this.state.userScore}
+                  answers={this.state.answers}
+                  value={this.state.value}
+                 />
+                </Grid> */}
              <NextButton 
               color="primary" 
               variant="contained" 
@@ -273,7 +308,7 @@ function RenderQuestions(props) {
   <Typography 
     variant="h5" 
     paragraph={true}
-    // style={{width:360}}
+    style={{padding:'0px 8px'}}
     >
       {props.questions[props.questionNumber]} 
   </Typography>
@@ -318,8 +353,10 @@ function RenderOptions(props) {
       } else {
         depSeverity = "The score was not recorded."
       }
+      let depGrade = finalScore*(-19)
+      // try to find a formula that relates finalScore to grade
       return(
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           <div>{suicideWarning}</div>
           <Typography
             variant="h6" 
@@ -328,10 +365,8 @@ function RenderOptions(props) {
           >
             Your depression score is: {finalScore}/27. This is considered to be in the {depSeverity} range.
           </Typography>
-          <ResultsChart 
-            finalScore={finalScore}
-          />
-          <Typography align="center">
+          <LinearGauge grade={depGrade}/>
+          <Typography align="center" style={{color: '#737171', paddingTop:8}}>
             Note: This assessment does not <em>diagnose</em> depression; only a trained professional can do that.
           </Typography>
 
@@ -356,7 +391,7 @@ function RenderOptions(props) {
                 // onChange={() => props.updateQuestionNumber(index)} this needs to just update their score.
               />
             </CardActionArea> */}
-              {/* <FormLabel component="legend">{option}</FormLabel> */}
+              {/* <FormLabel component="legend">"Severe Mild Moderate"</FormLabel> */}
               <RadioGroup color="primary" className={classes.choiceCards} number={index} value={value} onChange={(e) => updateScore(index, e)}>
               {/* <RadioGroup color="primary" className={classes.choiceCards} number={index} value={value} onChange={setValue}> */}
               {/* Not sure why I can't set the value below to index... */}
