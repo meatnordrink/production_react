@@ -353,7 +353,7 @@ function RenderOptions(props) {
       } else {
         depSeverity = "The score was not recorded."
       }
-      let depGrade = finalScore*(-19)
+      let depGrade = finalScore*(-5)
       // try to find a formula that relates finalScore to grade
       return(
         <Grid item xs={12}>
