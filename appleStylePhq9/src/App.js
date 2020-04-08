@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Card, CardContent, CardActionArea, Radio, RadioGroup, SvgIcon, FormControl, FormLabel, FormControlLabel } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme, useTheme, makeStyles, styled } from '@material-ui/core/styles'
 import Chart from "react-apexcharts";
+import LinearGauge from './components/LinearGauge'
 import MenuIcon from '@material-ui/icons/Menu';
 import './App.css';
 import UpLiftLogo from './assets/UpLift_Logo.svg';
@@ -122,12 +123,29 @@ class MakeQuestion extends React.Component {
     };
     this.updateQuestionNumber = this.updateQuestionNumber.bind(this);
     this.questionRenderer = this.questionRenderer.bind(this);
+    this.maintainRenderer = this.maintainRenderer.bind(this);
     this.updateScore = this.updateScore.bind(this);
   }
 
   questions = this.props.questions;
   options = this.props.options;
 
+  maintainRenderer() {
+    let questionNumber = this.state.questionNumber;
+
+      return(
+        <div>
+        {questionNumber < 9 && 
+        <Typography variant="body1" align="left" paragraph="true">Over the last <b>two weeks</b>, how often have you been bothered by ...</Typography>
+        }
+        {questionNumber = 9 && 
+          <LinearGauge />
+        }
+        </div>
+
+      )
+  }
+  
   questionRenderer() {
     let questionNumber = this.state.questionNumber;
     // let questions = this.questions;
@@ -145,6 +163,10 @@ class MakeQuestion extends React.Component {
     let disabled = this.state.disabled;
     let value = this.state.value;
     questionNumber++;
+    // if (questionNumber >= this.questions.length) {
+    //   alert('hey')
+    //   disabled = !disabled;
+    // } think through this; doesn't work. will have to do something with this...
     disabled = !disabled;
     value = 'disabled'
     this.setState({
@@ -163,7 +185,9 @@ class MakeQuestion extends React.Component {
     // let value = optionValue;
     answers[questionNumber] = score
     userScore += score;
-    disabled = !disabled;
+    if (disabled = true) {
+      disabled = !disabled;
+    }
     value = optionValue;
     this.setState({
       userScore: userScore,
@@ -218,7 +242,7 @@ class MakeQuestion extends React.Component {
                 md={5}
                 lg={4}
                 >
-                  <Typography variant="body1" align="left" paragraph="true">Over the last <b>two weeks</b>, how often have you been bothered by ...</Typography>
+                  <this.maintainRenderer />
                   <this.questionRenderer />
               </Grid>
               <RenderOptions
