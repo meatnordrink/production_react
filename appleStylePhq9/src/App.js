@@ -4,6 +4,7 @@ import { ThemeProvider, createMuiTheme, useTheme, makeStyles, styled, withTheme 
 import Chart from "react-apexcharts";
 import LinearGauge from './components/LinearGauge';
 import ScoreResponse from './components/ScoreResponse';
+import Resources from './components/Resources';
 import MenuIcon from '@material-ui/icons/Menu';
 import './App.css';
 import UpLiftLogo from './assets/UpLift_Logo.svg';
@@ -243,7 +244,7 @@ class MakeQuestion extends React.Component {
 
   render(){
     return(
-      // <Paper elevation={12} 
+      // <Paper elevation={12} 	If you're concerned about your mental health, please talk to a health professional like your primary care physician to get a formal diagnosis and to discuss possible treatments.
       // style={{
       //   paddingTop:10,
       //   marginTop:50,
@@ -366,7 +367,7 @@ function RenderOptions(props) {
       } else if (finalScore < 3) {
         depGrade = 10;
       }
-      // try to find a formula that relates finalScore to grade
+
       return(
         <Grid item xs={12}>
           <div>{suicideWarning}</div>
@@ -382,6 +383,11 @@ function RenderOptions(props) {
             Note: This assessment does not <em>diagnose</em> depression; only a trained professional can do that.
           </Typography>
           <ScoreResponse depSeverity={depSeverity}/>
+          {(finalScore <10)
+            ? <Typography paragraph='true' align='left'>If you're concerned about your mental health, please talk to a health professional like your primary care physician to get a formal diagnosis and to discuss possible treatments.</Typography>
+            : <Typography paragraph='true' align='left'>Please talk to a health professional like your primary care physician about which treatment options are right for you.</Typography>
+          }
+          <Resources depSeverity={depSeverity} suicidal={suicidal}/>
         </Grid>
       );
     }
