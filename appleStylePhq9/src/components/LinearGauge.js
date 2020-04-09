@@ -21,6 +21,16 @@ const otherStyles = makeStyles({
         boxShadow: '0 1px 3px rgba(0,0,0,.1)',
         borderRadius: 11,
     },
+    cardTransform: {
+        display: 'flex',
+        background: 'linear-gradient(90deg, red, orange, yellow, 80%, #04ef04)',
+        transition: '4s',
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        boxShadow: '0 1px 3px rgba(0,0,0,.1)',
+        borderRadius: 11,
+    },
     choiceText: {
         display: 'flex', 
         color: 'black',
@@ -33,6 +43,9 @@ const otherStyles = makeStyles({
         justifyContent: 'flex-end',
         padding: '8px 0px 0px 0px',
         marginLeft: 0,
+        transition: '4s',
+        justifyContent: 'flex-start',
+        // marginLeft: props => props.marginLeft
         // transition: '4s',
         // transform: props => props.transform
     },
@@ -43,7 +56,8 @@ const otherStyles = makeStyles({
         padding: '8px 0px 0px 0px',
         marginLeft: 0,
         transition: '4s',
-        transform: props => props.transform
+        justifyContent: 'flex-start',
+        marginRight: props => props.marginRight
     },
     circle: {
         color: '#2e4bf100',
@@ -62,10 +76,10 @@ const otherStyles = makeStyles({
 })
 
 export default function(props) {
-    const styleProps = { transform: `translate(${props.grade}%)`}
+    const styleProps = { marginRight: `calc(${props.grade}% - 34.4px)`}
     let classes = otherStyles(styleProps);
     let styleToUse = classes.radios;
-     const [radioStyle, setStyle] = React.useState(styleToUse)
+    const [radioStyle, setStyle] = React.useState(styleToUse)
 
     useEffect(() => {
         setTimeout(() => {

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Card, CardContent, CardActionArea, Radio, RadioGroup, SvgIcon, FormControl, FormLabel, FormControlLabel } from '@material-ui/core';
-import { ThemeProvider, createMuiTheme, useTheme, makeStyles, styled } from '@material-ui/core/styles'
+import { ThemeProvider, createMuiTheme, useTheme, makeStyles, styled, withTheme } from '@material-ui/core/styles'
 import Chart from "react-apexcharts";
-import LinearGauge from './components/LinearGauge'
+import LinearGauge from './components/LinearGauge';
+import ScoreResponse from './components/ScoreResponse';
 import MenuIcon from '@material-ui/icons/Menu';
 import './App.css';
 import UpLiftLogo from './assets/UpLift_Logo.svg';
@@ -10,7 +11,14 @@ import UpLiftLogo from './assets/UpLift_Logo.svg';
 
 // https://apexcharts.com/docs/react-charts/
 
-//To do
+//==========================
+//To do: 
+//  * Add GT content to end
+//  * Add social share buttons
+//  * Make "learn self-help skills with UpLift look fancier than the others" 
+//==========================
+
+//Optional To-Do
 // * replace all the 8px paddings around radio buttons, text with some universal style
 
 // https://www.apple.com/covid19/
@@ -18,6 +26,9 @@ import UpLiftLogo from './assets/UpLift_Logo.svg';
 const useStyles = makeStyles({
   root: {
     color: 'red'
+  },
+  grid: {
+    minWidth: '100%'
   },
   choiceCards: {
     // display: 'flex',
@@ -50,6 +61,7 @@ const NextButton = styled(Button)({
   fontSize: 14,
   marginTop: '3vw',
   padding: 10,
+  color: 'white'
 })
 
 // export default function MediaCard() {
@@ -153,12 +165,6 @@ class MakeQuestion extends React.Component {
             ? <Typography variant="body1" align="left" paragraph="true" style={{padding:'0px 8px'}}>Over the last <b>two weeks</b>, how often have you been bothered by ...</Typography>
             : null
           }
-        {/* {questionNumber < 9 && 
-        <Typography variant="body1" align="left" paragraph="true">Over the last <b>two weeks</b>, how often have you been bothered by ...</Typography>
-        }
-        {questionNumber = 9 && 
-          <LinearGauge grade='-185'/>
-        } */}
         </div>
 
       )
@@ -256,9 +262,10 @@ class MakeQuestion extends React.Component {
             
               <Grid 
                 item 
+                style={{width: '100%'}}
                 xs={12}
                 md={5}
-                lg={6}
+                lg={4}
                 >
                   <this.maintainRenderer />
                   <this.questionRenderer />
@@ -353,7 +360,12 @@ function RenderOptions(props) {
       } else {
         depSeverity = "The score was not recorded."
       }
-      let depGrade = finalScore*(-5)
+      let depGrade = finalScore * 3.7
+      if (finalScore > 24) {
+        depGrade = 89;
+      } else if (finalScore < 3) {
+        depGrade = 10;
+      }
       // try to find a formula that relates finalScore to grade
       return(
         <Grid item xs={12}>
@@ -366,10 +378,10 @@ function RenderOptions(props) {
             Your depression score is: {finalScore}/27. This is considered to be in the {depSeverity} range.
           </Typography>
           <LinearGauge grade={depGrade}/>
-          <Typography align="center" style={{color: '#737171', paddingTop:8}}>
+          <Typography align="center" paragraph='true' style={{color: '#737171', paddingTop:8}}>
             Note: This assessment does not <em>diagnose</em> depression; only a trained professional can do that.
           </Typography>
-
+          <ScoreResponse depSeverity={depSeverity}/>
         </Grid>
       );
     }
@@ -381,7 +393,7 @@ function RenderOptions(props) {
           style={{padding:8}}
           >
           <Card className={classes.choiceCards}>
-            {/* <CardContent className={classes.choiceCardText}>
+            {/* <CardContent className={cla(sses.choiceCardText}>
               {option}
             </CardContent>
             <CardActionArea className={classes.radios}>
