@@ -58,11 +58,11 @@ export default function(props) {
 
             <b>And it's effective.</b> Computer-delivered CBT programs have been shown to be as effective as face-to-face CBT. In a study of UpLift, the average user improved their mood by over 50% in the first month.
 
-            Complete the first session of UpLift for free — <a href='https://run.uplift.app/begin?utm_source=PHQtest'>Get started</a>.
+            Complete the first session of UpLift for free — <a href='https://www.uplift.app'>Get started</a>.
         </Typography>      
         ]
        
-    let panelTitles = ['Finding a Therapist', 'Medication for Depression', 'Crisis or suicide resources', 'Learn self-help skills with UpLift']
+    let panelTitles = ['Finding a Therapist', 'Medication for Depression', 'Crisis or suicide resources', <Typography><b>Learn self-help skills with UpLift</b></Typography>]
 
     if (!suicidal) {
         panelTitles.splice(2, 1)
@@ -76,7 +76,7 @@ export default function(props) {
             aria-controls="panel-content"
             id="panel-header"
             >
-                <Typography>{panelTitles[index]}</Typography>
+                <Typography >{panelTitles[index]}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
                 {text}
@@ -85,6 +85,8 @@ export default function(props) {
     )
 
     return(
-        panels
+        <div>
+            {panels}
+        </div>
     )
 }

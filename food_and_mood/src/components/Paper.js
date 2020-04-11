@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Typography, Paper, } from '@material-ui/core';
 import RenderImage from './Image'
 
+// This renders a typical screen with an image, text, and button/buttons. For alternate arrangements, use PaperCustom, and pass in the elements as children (referenced by props.children.)
 
 export default function RenderPaper(props){
 

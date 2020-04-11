@@ -14,9 +14,11 @@ import UpLiftLogo from './assets/UpLift_Logo.svg';
 
 //==========================
 //To do: 
-//  * Add GT content to end
 //  * Add social share buttons
-//  * Make "learn self-help skills with UpLift look fancier than the others" 
+//  * Make "learn self-help skills with UpLift" look fancier than the others 
+//  * Add "email me my results" button, hook up to MailChimp API
+//  * Read official bit on React animations, consider incorporating any that seem genuinely positive.
+//  * Read up on Webpack, clean up the imports via same.
 //==========================
 
 //Optional To-Do
@@ -502,7 +504,7 @@ function RenderSuicideDialog() {
           Suicidal thought or urges need to be taken seriously. We urge you to reach out to one of the resources below if you're feeling suicidal; there's help available <b>right now</b>.
         </DialogContentText>
         <DialogContentText>
-          The <a href="http://www.crisistextline.org/" rel="noopener noreferrer" target="_blank">Crisis Text Line</a> is a service that operates 24/7, works anywhere in the US, Canada, or the UK, and is for any kind of crisis. A trained crisis volunteer will respond to your text quickly (usually in under 5 minutes). 
+          The <a href="http://www.crisistextline.org/" target="_blank">Crisis Text Line</a> is a service that operates 24/7, works anywhere in the US, Canada, or the UK, and is for any kind of crisis. A trained crisis volunteer will respond to your text quickly (usually in under 5 minutes). 
           <ul>
             <li>For the US, text <b>741741</b>.</li>
             <li>For Canada, text <b>686868</b>.</li>
@@ -510,7 +512,7 @@ function RenderSuicideDialog() {
           </ul>
         </DialogContentText>
         <DialogContentText>
-          If you're outside the US, <a href="http://befrienders.org" rel="noopener noreferrer" target="_blank">Befrienders Worldwide</a> has links to hotlines throughout the world. They'll help connect you to someone who can listen in a supportive and nonjudgmental way. Click on the link now to be connected.
+          If you're outside the US, <a href="http://befrienders.org" target="_blank">Befrienders Worldwide</a> has links to hotlines throughout the world. They'll help connect you to someone who can listen in a supportive and nonjudgmental way. Click on the link now to be connected.
         </DialogContentText>
       </DialogContent>
       <DialogActions>

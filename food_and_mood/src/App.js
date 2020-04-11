@@ -6,7 +6,7 @@ import RenderImage from './components/Image'
 import RenderButton from './components/Button'
 import RenderButtonGroup from './components/ButtonGroup'
 //one way or the other, bundle all these so they can be in a single import statement
-import FoodOne from './Chapters/food'
+import Food from './Chapters/food'
 import VitaminDOne from './Chapters/vitaminD'
 import AlcoholOne from './Chapters/alcohol'
 import TobaccoOne from './Chapters/tobacco'
@@ -85,7 +85,7 @@ class Screen extends React.Component{
     let pages = {
       pageOne: <PageOne handleClick={this.updatePage} />,
       pageTwo: <PageTwo handleClick={this.updatePage} />,
-      foodOne: <FoodOne handleClick={this.updatePage} />,
+      foodOne: <Food handleClick={this.updatePage} homePage={this.state.page}/>,
       vitaminDOne: <VitaminDOne handleClick={this.updatePage} />,
       alcoholOne: <AlcoholOne handleClick={this.updatePage} />,
       tobaccoOne: <TobaccoOne handleClick={this.updatePage} />
