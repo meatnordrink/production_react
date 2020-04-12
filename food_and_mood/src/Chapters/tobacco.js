@@ -99,24 +99,24 @@ function TobaccoThree(props) {
   let panelText = [
       <Typography>
         <ul>
-          <li><a href='https://www.cdc.gov/tobacco/campaign/tips/quit-smoking/' target='blank'>Center for Disease Control and Prevention</a> This site offers tools (many with elements of CBT) to help people develop a successful plan to quit, including online forums, free motivational texts, and a free app called QuitGuide that has great features like supportive reminders at certain locations or times of day you know you have cravings.</li>
+          <li><a href='https://www.cdc.gov/tobacco/campaign/tips/quit-smoking/' target='_blank'>Center for Disease Control and Prevention</a> This site offers tools (many with elements of CBT) to help people develop a successful plan to quit, including online forums, free motivational texts, and a free app called QuitGuide that has great features like supportive reminders at certain locations or times of day you know you have cravings.</li>
           
-          <li><a href='http://www.freedomfromsmoking.org' target='blank'>The American Lung Association's "Freedom from Smoking" program</a> This rigorous program includes live support. It costs about $100, but is offered free by some employers and is fully or partially covered by some insurance plans. Resources on the page help you figure out if you're covered.</li>
+          <li><a href='http://www.freedomfromsmoking.org' target='_blank'>The American Lung Association's "Freedom from Smoking" program</a> This rigorous program includes live support. It costs about $100, but is offered free by some employers and is fully or partially covered by some insurance plans. Resources on the page help you figure out if you're covered.</li>
         </ul>
       </Typography>
   ]
   let panelText2 = [
     <Typography>
       <ul>
-        <li><em>Tobacco smoking as a risk factor for depression. A 26-year population-based follow-up study. </em><a href='https://doi.org/10.1016/j.jpsychires.2010.06.006' target='blank'>Read Here</a></li>
-        <li><em>Cigarette smoking and incidence of first depressive episode: An 11-year, population-based follow-up study. </em><a href='https://doi.org/10.1093/aje/kwj058' target='blank'>Read Here</a></li>
-        <li><em>Tobacco smoking as a risk factor for major depressive disorder: population-based study. </em><a href='https://doi.org/10.1192/bjp.bp.107.046706' target='blank'>Read Here</a></li>
+        <li><em>Tobacco smoking as a risk factor for depression. A 26-year population-based follow-up study. </em><a href='https://doi.org/10.1016/j.jpsychires.2010.06.006' target='_blank'>Read Here</a></li>
+        <li><em>Cigarette smoking and incidence of first depressive episode: An 11-year, population-based follow-up study. </em><a href='https://doi.org/10.1093/aje/kwj058' target='_blank'>Read Here</a></li>
+        <li><em>Tobacco smoking as a risk factor for major depressive disorder: population-based study. </em><a href='https://doi.org/10.1192/bjp.bp.107.046706' target='_blank'>Read Here</a></li>
       </ul>
     </Typography>
 ]
 
   let panelTitles = [ "Click to view resources that help people quit" ]
-  let panelTitles2 = [ <Typography color='#bdbdbd'>Selected Sources</Typography> ]
+  let panelTitles2 = [ <Typography style={{color:'#bdbdbd'}}>Selected Sources</Typography> ]
 
   function choice() {
     return(

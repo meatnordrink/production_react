@@ -103,14 +103,14 @@ function AlcoholThree(props) {
         However, some recent research has suggested that even moderate drinking can increase the risk of some cancers. Recently, a prominent study found that drinking at all increased risk of death from all causes ("all causes" including anything, like old age, drunk driving, being hit by a car, etc.). The study is the subject of much debate, and the increase in risk for moderate drinkers was very small.
       </Typography>,
       <Typography>
-				<Typography paragraph='true'>If you're a heavy drinker, cutting down (many sources recommend 1-2/day as a healthy level) can have positive effects throughout your life. But it's often hard. The site <a href='https://www.drinkaware.co.uk/advice/how-to-reduce-your-drinking/how-to-cut-down/' target='blank'>Drinkaware</a> has some great advice and resources on how to go about cutting down successfully.</Typography>
+				<Typography paragraph='true'>If you're a heavy drinker, cutting down (many sources recommend 1-2/day as a healthy level) can have positive effects throughout your life. But it's often hard. The site <a href='https://www.drinkaware.co.uk/advice/how-to-reduce-your-drinking/how-to-cut-down/' target='_blank'>Drinkaware</a> has some great advice and resources on how to go about cutting down successfully.</Typography>
         
         <Typography paragraph='true'>I also recommend consulting with your doctor. They may have resources that can help; and if your body is alcohol-dependent, there can be potentially serious physiological reactions from your body to not having alcohol in your bloodstream.</Typography>
       </Typography>, 
       <Typography>
 				<Typography paragraph='true'>If you have a history of alcohol abuse or trouble limiting your consumption, or suspect you might, stopping drinking completely is likely the best choice; and some recent research is suggesting that it's the best health-choice for anyone.</Typography>
 
-        <Typography paragraph='true'>But, quitting drinking can be a huge challenge. The  <a href='https://www.drinkaware.co.uk/' target='blank'>Drinkaware site</a> is a great resource for this; it has advice and strategies that can really help. In addition, HelpGuide has a good guide on the subject <a href='https://www.helpguide.org/articles/addictions/overcoming-alcohol-addiction.htm' target='blank'>here</a>.</Typography>
+        <Typography paragraph='true'>But, quitting drinking can be a huge challenge. The  <a href='https://www.drinkaware.co.uk/' target='_blank'>Drinkaware site</a> is a great resource for this; it has advice and strategies that can really help. In addition, HelpGuide has a good guide on the subject <a href='https://www.helpguide.org/articles/addictions/overcoming-alcohol-addiction.htm' target='_blank'>here</a>.</Typography>
 
         <Typography paragraph='true'>If you're thinking of quitting drinking, <b>especially if you're a heavy drinker</b>, I recommend doing so with your doctor's guidance. People who have become alcohol-dependent yet want to quit drinking may need a doctor's help to address potentially serious physiological problems that may arise when their bodies start to adjust to not having alcohol in their bloodstreams.</Typography>
 
@@ -118,10 +118,10 @@ function AlcoholThree(props) {
       </Typography>,
       <Typography>
 					<ul>
-            <li><em>Effects of moderate drinking on depression in young adults: Findings from a National Longitudinal Study. </em><a href='https://doi.org/10.2105/AJPH.2003.030700' target='blank'>Read Here.</a></li>
-            <li><em>Anxiety and depression among abstainers and low-level alcohol consumers. the Nord-Trøndelag Health Study. </em><a href='https://doi.org/10.1111/j.1360-0443.2009.02659.x' target='blank'>Read Here.</a></li>
-            <li><em>Moderate alcohol use and depression in young adults: Findings from a National Longitudinal Study. </em><a href='http<em>s://doi.org/10.2105/AJPH.2003.030700' target='blank'>Read Here.</a></li>
-            <li><em>Alcohol use and depression from middle age to the oldest old: gender is more important than age. </em><a href='https://doi.org/10.1017/S1041610212000087' target='blank'>Read Here.</a></li>
+            <li><em>Effects of moderate drinking on depression in young adults: Findings from a National Longitudinal Study. </em><a href='https://doi.org/10.2105/AJPH.2003.030700' target='_blank'>Read Here.</a></li>
+            <li><em>Anxiety and depression among abstainers and low-level alcohol consumers. the Nord-Trøndelag Health Study. </em><a href='https://doi.org/10.1111/j.1360-0443.2009.02659.x' target='_blank'>Read Here.</a></li>
+            <li><em>Moderate alcohol use and depression in young adults: Findings from a National Longitudinal Study. </em><a href='http<em>s://doi.org/10.2105/AJPH.2003.030700' target='_blank'>Read Here.</a></li>
+            <li><em>Alcohol use and depression from middle age to the oldest old: gender is more important than age. </em><a href='https://doi.org/10.1017/S1041610212000087' target='_blank'>Read Here.</a></li>
           </ul>
 
       </Typography>

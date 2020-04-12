@@ -73,7 +73,7 @@ function DOne(props) {
 
 function DTwo(props) {
 
-  let text = ["Recent research has found that this deficiency is very commmon; 40% of people in the US, and 70-80% of people with darker skin! In fact, some research suggests that a significant proportion of depression may actually be due to vitamin D deficiency.", <Typography variant='caption'><a href='https://doi.org/10.1016/j.nutres.2010.12.001' target='blank'>See Research</a></Typography>]
+  let text = ["Recent research has found that this deficiency is very commmon; 40% of people in the US, and 70-80% of people with darker skin! In fact, some research suggests that a significant proportion of depression may actually be due to vitamin D deficiency.", <Typography variant='caption'><a href='https://doi.org/10.1016/j.nutres.2010.12.001' target='_blank'>See Research</a></Typography>]
   // https://www.ncbi.nlm.nih.gov/pubmed/21310306
 
   function choice() {

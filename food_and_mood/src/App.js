@@ -35,10 +35,10 @@ import './App.css';
 
 //_________________________________
 //        TO-DO:
-// * NEXT: Finish Alcohol, Vitamin D, etc.
 // * Go through errors in console, see if any are worth looking into.
 // * Put in a simple router, see how that goes. Look at whether state can be saved when hopping between screens. 
 // * Make a theme-change feature to put in the menu.
+// * Consider replacing dropdowns-within-dropdowns with dialogs or something else. 
 //_________________________________
 
 const theme = createMuiTheme({
@@ -48,12 +48,6 @@ const theme = createMuiTheme({
     }
   }
 })
-
-// const useStyles = makeStyles({
-//   root: {
-
-//   }
-// })
 
 class Screen extends React.Component{
   constructor(props){
@@ -66,7 +60,6 @@ class Screen extends React.Component{
 
   updatePage(nextPage) {
     let page = this.state.page;
-    // page++;
     page = nextPage;
     this.setState({
       page: page
@@ -75,14 +68,6 @@ class Screen extends React.Component{
 
   render(){
   
-    // let pages = [
-    //   <PageOne 
-    //     handleClick={this.updatePage}
-    //   />, 
-    //   <PageTwo
-    //     handleClick={this.updatePage}
-    //   />
-    //   ]
     let pages = {
       pageOne: <PageOne handleClick={this.updatePage} />,
       pageTwo: <PageTwo handleClick={this.updatePage} />,
@@ -91,8 +76,6 @@ class Screen extends React.Component{
       alcoholOne: <AlcoholOne handleClick={this.updatePage} />,
       tobaccoOne: <TobaccoOne handleClick={this.updatePage} />
     }
-    // Consider organizing subsections as arrays within arrays; food: { one : <FoodOne> ... } ; though that might not actually be any clearer/cleaner...
-
 
     // note that these had to be inside the render function to pass the updatePage function in such a way that it was properly bound.
     let pageToRender = pages[this.state.page]
