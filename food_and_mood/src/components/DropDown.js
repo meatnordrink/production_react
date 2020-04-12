@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, makeStyles  } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import '../App.css'
 
 const useStyles = makeStyles({
     root: {
@@ -23,13 +24,13 @@ export default function(props) {
     // }
 
     let panels = panelText.map((text, index) => 
-        <ExpansionPanel>
+        <ExpansionPanel className='expansionPanel'>
             <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel-content"
             id="panel-header"
             >
-                <Typography style={{fontWeight:"bold"}}>{panelTitles[index]}</Typography>
+                <Typography style={{fontStyle: "italic"}}>{panelTitles[index]}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
                 {text}

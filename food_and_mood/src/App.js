@@ -35,6 +35,7 @@ import './App.css';
 
 //_________________________________
 //        TO-DO:
+// * NEXT: Finish Alcohol, Vitamin D, etc.
 // * Go through errors in console, see if any are worth looking into.
 // * Put in a simple router, see how that goes. Look at whether state can be saved when hopping between screens. 
 // * Make a theme-change feature to put in the menu.
@@ -131,7 +132,7 @@ function PageTwo(props) {
   const text = ["Even smaller and specific changes have been found to have significant impact.", <Typography>Check out a few of the sections below, and see if any of the ideas seem like they'd be good for <b>you</b>.</Typography>]
 
   const options = ["Food", "Vitamin D", "Alcohol", "Cigarettes"]
-  const optionFunctions = [() => props.handleClick("foodOne"), () => props.handleClick("vitaminDOne"), () => props.handleClick("alcoholOne"), () => props.handlclick("tobaccoOne")]
+  const optionFunctions = [() => props.handleClick("foodOne"), () => props.handleClick("vitaminDOne"), () => props.handleClick("alcoholOne"), () => props.handleClick("tobaccoOne")]
   
 
   function choice() {

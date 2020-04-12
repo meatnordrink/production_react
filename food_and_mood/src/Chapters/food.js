@@ -4,8 +4,6 @@ import RenderButton from '../components/Button';
 import RenderPaper from '../components/Paper';
 import RenderPaperCustom from '../components/PaperCustom';
 import RenderDropDown from '../components/DropDown';
-import RenderParagraphs from '../components/Paragraphs';
-import RenderImage from '../components/Image';
 import '../App.css'
 
 export default class Food extends React.Component {
@@ -14,13 +12,13 @@ export default class Food extends React.Component {
     this.state = {
       page: "pageOne"
     };
-    this.moveForward = this.moveForward.bind(this);
+    this.updatePage = this.updatePage.bind(this);
     this.done = this.done.bind(this);
   }
 
   done = () => { this.props.handleClick('pageTwo'); }
 
-  moveForward(nextPage) {
+  updatePage(nextPage) {
     let page = this.state.page;
     page = nextPage;
     this.setState({
@@ -31,8 +29,8 @@ export default class Food extends React.Component {
   render(){
   
     let pages = {
-      pageOne: <FoodOne handleClick={this.moveForward} />,
-      pageTwo: <FoodTwo handleClick={this.moveForward} />,
+      pageOne: <FoodOne handleClick={this.updatePage} />,
+      pageTwo: <FoodTwo handleClick={this.updatePage} />,
       pageThree: <FoodThree handleClick={this.done} />
     }
 
@@ -98,11 +96,24 @@ function FoodTwo(props) {
 
 function FoodThree(props) {
 
+  let panelTitles3 = ["What about mercury?", "What about fish oil?"]
+  let panelText3= [ 
+    <Typography>
+      <Typography paragraph='true'>It's true that many fish are very high in mercury, a chemical that's harmful to humans. But there are lots of delicious fish that are much lower in mercury, such as salmon, shrimp, sardines, tilapia, cod, catfish, scallops, and clam. Larger fish, like swordfish, shark, and albacore tuna (light tuna is lower) are higher in mercury and should be eaten less.</Typography>
+
+      Want to know if your favorite fish is low mercury? Check out a complete listing <a href='http://www.fda.gov/Food/FoodborneIllnessContaminants/Metals/ucm115644.htm' target='blank'>here</a>.
+    </Typography>,
+    <Typography>
+      There's some evidence that fish oil supplements are helpful for depression as well, but there's more evidence for eating actual fish. Scientists theorize that the other nutrients in fish, not present in the oil, may also play a role, and enhance the anti-depressive effect. But, if you don't actually like fish, fish oil may be a good option!	
+    </Typography>
+
+  ]
+
   let panelText = [
       <Typography>
         Traditional diets (such as Mediterranean, Scandinavian, and Japanese) have been shown to help prevent depression. Researchers believe that this is because they rely on a wide variety of minimally-processed foods and fish.
-
-        "Traditional diets" mean diets that existed before the modern American diet.
+        <br/>
+        "Traditional diets" means diets that existed before the modern American diet.
       </Typography>,
       <Typography>
         Alright, of course, everyone knows these things are healthy for you. The point here is to make sure that these make up <em>most</em> of your diet, which leads us to the third principle:
@@ -111,15 +122,16 @@ function FoodThree(props) {
         I'm sure this isn't a big surprise either. A significant amount of fast food, commercially produced baked goods, white breads, and sweets in the diet all make depression more likely. All of these things tend to increase brain inflammation and reduce many types of brain function, both of which are associated with depression. (Of course, we wouldn't deny that some chocolate in moderation can be a powerful mood booster.) 
       </Typography>,
       <Typography>
-        Funnily enough, there's a lot of evidence that including a lot of fish in your diet helps prevent depression. Scientists think it's because of certain omega-3 fatty acids in fish, which can help reduce inflammation in the brain and enhance certain brain functions that are reduced in depressed people.
+        <Typography paragraph='true'>Funnily enough, there's a lot of evidence that including a lot of fish in your diet helps prevent depression. Scientists think it's because of certain omega-3 fatty acids in fish, which can help reduce inflammation in the brain and enhance certain brain functions that are reduced in depressed people.</Typography>
+        <RenderDropDown panelText={panelText3} panelTitles={panelTitles3}/>
+      </Typography>,
+      <Typography>
+        Actually, lowering meat intake hasn't been shown to help with depression. In fact, diets that recommend low meat intake, only eating lean meat, low-cholesterol diets, and diets that focus on weight loss have been found not to reduce depression. This probably doesn't mean you should have steak for dinner every night. Some evidence suggests that eating either a lot of meat or very little meat may both increase your risk for depression. As with so many things, moderation may be the best course.
       </Typography>
-
   ]
 
-  let panelTitles = [ "Traditional diets help prevent depression.", "Eat mostly vegetables, whole grains, fruits, nuts, beans, and seeds.", "Eat very few processed foods, fast-foods, and sweets.", "Eat more fish." ]
+  let panelTitles = [ "Traditional diets help prevent depression.", "Eat mostly vegetables, whole grains, fruits, nuts, beans, and seeds.", "Eat very few processed foods, fast-foods, and sweets.", "Eat more fish.", "What about meat?" ]
     
-  let text = ["The evidence suggests that, rather than focusing on the superfood-of-the-week or trying to get a lot of a specific nutrient, the best approach is to focus on your whole diet. Below is a set of simple principles that, recent evidence shows, are powerful tools in preventing and reducing depression:"]
-
   function choice() {
     return(
       <RenderButton
@@ -134,19 +146,11 @@ function FoodThree(props) {
     <RenderPaperCustom
       choice={choice}
     >
-      <RenderParagraphs text={text} />
+      <Typography paragraph='true'>The evidence suggests that, rather than focusing on the superfood-of-the-week or trying to get a lot of a specific nutrient, the best approach is to focus on your whole diet. Below is a set of simple principles that, recent evidence shows, are powerful tools in preventing and reducing depression:</Typography>
       <RenderDropDown panelTitles={panelTitles} panelText={panelText} />
     </RenderPaperCustom>
   )
 
 }
-
-// Button to exit:
-// <RenderButton
-// text="But what to eat?"
-// onClick={props.handleClick}
-// nextPage="pageOne"
-// />
-
 
 //exports.FoodOne = FoodOne

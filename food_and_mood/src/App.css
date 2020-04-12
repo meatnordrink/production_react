@@ -14,6 +14,16 @@ html {
     height: 100vh;
 }
 
+.expansionPanel ul {
+    padding-inline-start: 10px;
+}
+
 .winkAfter::after {
     content: ' \1F609';
 }
+
+.bibliographyTitle{
+    color: '#bdbdbd';
+    /* This can be used where this sheet is imported. It's not everywhere; I don't think it's worth importing the sheet just for this one class.*/
+}
+

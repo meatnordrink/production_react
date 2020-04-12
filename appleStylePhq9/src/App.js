@@ -19,6 +19,7 @@ import UpLiftLogo from './assets/UpLift_Logo.svg';
 //  * Add "email me my results" button, hook up to MailChimp API
 //  * Read official bit on React animations, consider incorporating any that seem genuinely positive.
 //  * Read up on Webpack, clean up the imports via same.
+//  * clean up
 //==========================
 
 //Optional To-Do
@@ -37,7 +38,7 @@ const useStyles = makeStyles({
     // display: 'flex',
     // width: '60vw',
     // fontSize: 18,
-    // fontWeight: 700,
+    // fontWeight: 700,https://css-tricks.com/perfect-full-page-background-image/
     boxShadow: '0 1px 3px rgba(0,0,0,.1)',
     borderRadius: 11
   },
