@@ -46,17 +46,16 @@ export default function(props) {
             <a href='http://www.suicideapp.com/'>Creating a safety plan</a> (when not in a crisis) can also help you cope and feel safe in the future.
         </Typography>,
         <Typography>
-            UpLift is a self-led app that teaches scientifically-backed skills to help you feel better.
+            UpLift is an app that teaches scientifically backed skills to help you feel better. 
 
-            With 12 weekly sessions and daily tools, you learn to:
+            With 12 weekly sessions and daily tools, you can learn to:
             <ul>
-                <li>Recharge your energy</li>
+                <li>Use Cognitive Behavioral skills to improve your mood</li>
                 <li>Identify your deep-rooted thoughts and triggers</li>
                 <li>Regain enjoyment in your hobbies and daily life</li>
-                <li>Apply the skills of Cognitive Behavioral Therapy (CBT), the #1 psychological treatment for depression</li>
             </ul>
 
-            <b>And it's effective.</b> Computer-delivered CBT programs have been shown to be as effective as face-to-face CBT. In a study of UpLift, the average user improved their mood by over 50% in the first month.
+            <b>And it's effective.</b> In a study of UpLift, the average user improved their mood by over 50% in the first month.
 
             Complete the first session of UpLift for free — <a href='https://www.uplift.app'>Get started</a>.
         </Typography>      

@@ -15,7 +15,7 @@ import UpLiftLogo from './assets/UpLift_Logo.svg';
 //==========================
 //To do: 
 //  * Add social share buttons
-//  * Make "learn self-help skills with UpLift" look fancier than the others 
+//  * Add first page disclaimer (see Slack, "other" channel.)
 //  * Add "email me my results" button, hook up to MailChimp API
 //  * Read official bit on React animations, consider incorporating any that seem genuinely positive.
 //  * Read up on Webpack, clean up the imports via same.
@@ -85,9 +85,9 @@ const theme = createMuiTheme({
   }
 })
 
-const questionsPHQ9 = ["Little interest or pleasure in doing things?", "Feeling down, depressed, or hopeless.", "Trouble falling or staying asleep, or sleeping too much.", "Feeling tired or having little energy.", "Poor appetite or overeating.", "Feeling bad about yourself - or that you are a failure or have let yourself or your family down.", <Typography variant="h5">Over the last <em>2 weeks</em>, how often have you had trouble concentrating on things?</Typography>, "Moving or speaking so slowly that other people could've noticed? Or the opposite - being much more fidgety or restless than usual.", "Thoughts about just wanting to fall asleep and not wake up, harming yourself, or killing yourself?"]
+const questionsPHQ9 = ["Little interest or pleasure in doing things?", "Feeling down, depressed, or hopeless?", "Trouble falling or staying asleep, or sleeping too much?", "Feeling tired or having little energy?", "Poor appetite or overeating?", "Feeling bad about yourself - or that you are a failure or have let yourself or your family down?", "Trouble concentrating on things, such as reading or watching TV?", "Moving or speaking so slowly that other people could've noticed? Or the opposite - being much more fidgety or restless than usual?", "Thoughts about just wanting to fall asleep and not wake up, harming yourself, or killing yourself?"]
 
-const optionsPHQ9 = ["Not at all", "Several Days", "More than half the days", "Nearly every day"];
+const optionsPHQ9 = ["Not at all", "Several days", "More than half the days", "Nearly every day"];
 
 class ResultsChart extends React.Component {
   constructor(props) {
@@ -379,7 +379,7 @@ function RenderOptions(props) {
             paragraph={true}
             align="center"
           >
-            Your depression score is: {finalScore}/27. This is considered to be in the {depSeverity} range.
+            Your depression score is {finalScore}/27. This is considered to be in the {depSeverity} range.
           </Typography>
           <LinearGauge grade={depGrade}/>
           <Typography align="center" paragraph='true' style={{color: '#737171', paddingTop:8}}>
@@ -388,7 +388,7 @@ function RenderOptions(props) {
           <ScoreResponse depSeverity={depSeverity}/>
           {(finalScore <10)
             ? <Typography paragraph='true' align='left'>If you're concerned about your mental health, please talk to a health professional like your primary care physician to get a formal diagnosis and to discuss possible treatments.</Typography>
-            : <Typography paragraph='true' align='left'>Please talk to a health professional like your primary care physician about which treatment options are right for you.</Typography>
+            : <Typography paragraph='true' align='left'>Please talk to a health professional like your primary care physician about what options are right for you.</Typography>
           }
           <Resources depSeverity={depSeverity} suicidal={suicidal}/>
         </Grid>
@@ -503,6 +503,10 @@ function RenderSuicideDialog() {
       <DialogContent>
         <DialogContentText>
           Suicidal thought or urges need to be taken seriously. We urge you to reach out to one of the resources below if you're feeling suicidal; there's help available <b>right now</b>.
+        </DialogContentText>
+        <DialogContentText>
+        <b>1-800-273-8255</b>. It's the number for the <a href="http://www.suicidepreventionlifeline.org/">National Suicide Prevention Lifeline</a>, where you can speak with a skilled, trained counselor 24/7. You can also <a href="http://www.suicidepreventionlifeline.org">visit their website</a> to try a live chat.
+
         </DialogContentText>
         <DialogContentText>
           The <a href="http://www.crisistextline.org/" target="_blank">Crisis Text Line</a> is a service that operates 24/7, works anywhere in the US, Canada, or the UK, and is for any kind of crisis. A trained crisis volunteer will respond to your text quickly (usually in under 5 minutes). 

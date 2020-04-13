@@ -4,33 +4,33 @@ import { ThemeProvider, createMuiTheme, useTheme, makeStyles, styled } from '@ma
 
 var userScore = '-210px';
 
-const otherStyles = makeStyles({
+const useStyles = makeStyles({
     root: {
-        background: 'linear-gradient(90deg, red, orange, yellow, 80%, #04ef04)',
+        background: 'linear-gradient(90deg, #04ef04, 10%, yellow, orange, red)',
         transition: '4s'
     },
     choiceCards: {
         display: 'flex',
-        background: 'linear-gradient(90deg, red, orange, yellow, 80%, #04ef04)',
+        background: 'linear-gradient(90deg, #04ef04, 10%, yellow, orange, red)',
         transition: '4s',
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-start',
         // fontSize: 18,
         // fontWeight: 700,
         boxShadow: '0 1px 3px rgba(0,0,0,.1)',
         borderRadius: 11,
     },
-    cardTransform: {
-        display: 'flex',
-        background: 'linear-gradient(90deg, red, orange, yellow, 80%, #04ef04)',
-        transition: '4s',
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        boxShadow: '0 1px 3px rgba(0,0,0,.1)',
-        borderRadius: 11,
-    },
+    // cardTransform: {
+    //     display: 'flex',
+    //     background: 'linear-gradient(90deg, #04ef04, 10%, yellow, orange, red)',
+    //     transition: '4s',
+    //     width: '100%',
+    //     flexDirection: 'row',
+    //     justifyContent: 'flex-end',
+    //     boxShadow: '0 1px 3px rgba(0,0,0,.1)',
+    //     borderRadius: 11,
+    // },
     choiceText: {
         display: 'flex', 
         color: 'black',
@@ -40,7 +40,6 @@ const otherStyles = makeStyles({
     radios: {
         // textAlign: 'right',
         display: 'flex',
-        justifyContent: 'flex-end',
         padding: '8px 0px 0px 0px',
         marginLeft: 0,
         transition: '4s',
@@ -54,19 +53,19 @@ const otherStyles = makeStyles({
         display: 'flex',
         justifyContent: 'flex-end',
         padding: '8px 0px 0px 0px',
-        marginLeft: 0,
         transition: '4s',
-        justifyContent: 'flex-start',
-        marginRight: props => props.marginRight
+        justifyContent: 'flex-end',
+        marginLeft: props => props.marginLeft
     },
     circle: {
         color: '#2e4bf100',
-        backgroundColor: '#0000ffb0',
+        backgroundColor: 'black',
         width: 3,
         height: 10,
         paddingTop: 0,
-        border: '2px #2f3f96 solid', 
+        border: '2px black solid', 
         marginBottom: 4,
+        transform: 'scale(.5)'
     },
     // changed: {
     //     color: '#748afb',
@@ -76,8 +75,8 @@ const otherStyles = makeStyles({
 })
 
 export default function(props) {
-    const styleProps = { marginRight: `calc(${props.grade}% - 34.4px)`}
-    let classes = otherStyles(styleProps);
+    const styleProps = { marginLeft: `calc(${props.grade}%)`}
+    let classes = useStyles(styleProps);
     let styleToUse = classes.radios;
     const [radioStyle, setStyle] = React.useState(styleToUse)
 
@@ -94,16 +93,16 @@ export default function(props) {
         >
         <Grid
         //  xs={12}
-         style={{display:'flex', justifyContent:'space-between', paddingBottom: 12, color: '#737171'}}
+         style={{display:'flex', justifyContent:'space-between', paddingBottom: 12, color: '#737171', width:'80%'}}
         >
-            <Typography>Severe</Typography>
-            <Typography>Moderate</Typography>
             <Typography>Mild</Typography>
+            <Typography>Moderate</Typography>
+            <Typography>Severe</Typography>
         </Grid>
 
         <Card className={classes.choiceCards}>
             <RadioGroup color="primary" className={classes.choiceCards} value='disabled'>
-                <FormControlLabel className={radioStyle} control={<Radio color="primary" className={classes.circle}/>} label={<Typography className={classes.choiceText}>Your Score</Typography>} labelPlacement="top" />
+                <FormControlLabel className={radioStyle} control={<Radio color="primary" className={classes.circle}/>} label={<Typography className={classes.choiceText}>You</Typography>} labelPlacement="top" />
             </RadioGroup>
         </Card>
     </Grid>
