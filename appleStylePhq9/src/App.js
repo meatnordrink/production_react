@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Card, CardContent, CardActionArea, Radio, RadioGroup, SvgIcon, FormControl, FormLabel, FormControlLabel, Box } from '@material-ui/core';
+import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Card, CardContent, CardActionArea, Radio, RadioGroup, SvgIcon, FormControl, FormLabel, FormControlLabel, Box, Divider, FormHelperText } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme, useTheme, makeStyles, styled, withTheme } from '@material-ui/core/styles'
 import Chart from "react-apexcharts";
 import LinearGauge from './components/LinearGauge';
@@ -80,6 +80,7 @@ const NextButton = styled(Button)({
 
 const theme = createMuiTheme({
   spacing: 12,
+  margin: 8,
   palette: {
     primary: {
       main: '#3cb4d3'
@@ -212,6 +213,8 @@ class MakeQuestion extends React.Component {
 
   render(){
     return(
+      <>
+      <RenderAppBar />
         <Grid 
           container
           spacing={1}
@@ -252,6 +255,7 @@ class MakeQuestion extends React.Component {
               </NextButton>
               : null }
         </Grid>
+      </>
     )
   }
 }
@@ -355,7 +359,7 @@ function RenderOptions(props) {
       );
 }
 
-function RenderAppBar(){
+function RenderAppBar(props){
   // set up a hook for anchorEl
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -378,11 +382,13 @@ function RenderAppBar(){
   }
 
   const theme = useTheme();
+ 
+  const styles = props.styles;
 
   //I'd much prefer the icon below wrapped in SvgIcon, but it's refusing to import it. I believe it's an issue with webpack. https://material-ui.com/components/icons/#material-icons
   return (
 
-    <AppBar color="transparent" elevation="0" position="static">
+    <AppBar style={styles} color="transparent" elevation="0" position="static">
     <Toolbar variant="dense">
       <span>
         <img style={{width:80, marginTop:10}} src={require('./assets/UpLift_Logo.svg')} />
@@ -458,17 +464,51 @@ function RenderSuicideDialog() {
 }
 
 function RenderFirstPage(props) {
+  let styles={
+    marginLeft:'calc(50% - 65px)',
+    padding: 0
+  }
+
   return(
     <ThemeProvider theme={theme}>
-      <Box p={2} border={1} borderColor='#c7c4c4' borderRadius='4%' style={{margin:8}}>
-        <Typography paragraph='true'>
-          Welcome! This PHQ9-questionnaire is frequently used by doctors and therapists to help their patients measure their depressive symptoms. It can hopefully shed some light on your own mood.
+
+      <Grid 
+          container
+          spacing={1}
+          direction="column" 
+          justify="center"
+          alignItems="center"
+          style={{marginTop:30}}
+          >
+            
+              <Grid 
+                item 
+                style={{width: '100%'}}
+                xs={12}
+                md={5}
+                lg={4}
+                >
+                    <RenderAppBar styles={styles} />
+     <Box p={2} border={1} borderColor='#c7c4c4' borderRadius='11px' m={1} style={{backgroundColor:'white'}}>
+        <Typography variant='h5' paragraph='true' align='center'>
+          The PHQ-9 Depression Questionnaire
         </Typography>
         <Typography paragraph='true'>
-          <b>Important note:</b> This assessment cannot diagnose you or offer medical advice. By using this website, you consent to the <a href='https://www.uplift.app/termsofuse' target='blank'>Terms of Service</a> and the <a href='https://www.uplift.app/privacypolicy' target='blank'>Privacy Policy</a> of <a href='https://www.uplift.app' target='blank'>UpLift</a>.
+          Welcome! The PHQ9-questionnaire is frequently used by doctors and therapists to help their patients measure their depressive symptoms. It can hopefully shed some light on your own mood.
         </Typography>
-        <NextButton color='primary' variant='contained' onClick={props.handleClick} style={{width:'100%', maxWidth:320}}>Begin</NextButton>
+        <Divider style={{marginBottom:16}}/>
+        <Typography paragraph='true'>
+          <b>Important:</b> This test is NOT a diagnostic test. Please consult your physician if you are concerned about your mood.
+        </Typography>
+        <Grid style={{display:'flex', justifyContent:'center'}}><NextButton color='primary' variant='contained' onClick={props.handleClick} style={{width:'90%', maxWidth:320}}>Begin</NextButton></Grid>
     </Box>
+    <Typography variant='caption' align='center' style={{display:'flex', justifyContent: 'space-around', margin:'16px 12px'}}> 
+          <a href='https://www.uplift.app/privacypolicy' target='blank'>Privacy Policy</a>   <a href='https://www.uplift.app/termsofuse' target='blank'>Terms of Service</a>
+        </Typography>
+    </Grid>
+    </Grid>
+
+
     </ThemeProvider>
   )
 }
@@ -514,7 +554,7 @@ function App() {
 
     <ThemeProvider theme={theme}>
     
-      <RenderAppBar />
+
       <Content />
 
     </ThemeProvider>
