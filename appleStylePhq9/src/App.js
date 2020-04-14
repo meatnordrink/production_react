@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Card, CardContent, CardActionArea, Radio, RadioGroup, SvgIcon, FormControl, FormLabel, FormControlLabel } from '@material-ui/core';
+import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Card, CardContent, CardActionArea, Radio, RadioGroup, SvgIcon, FormControl, FormLabel, FormControlLabel, Box } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme, useTheme, makeStyles, styled, withTheme } from '@material-ui/core/styles'
 import Chart from "react-apexcharts";
 import LinearGauge from './components/LinearGauge';
@@ -14,6 +14,7 @@ import UpLiftLogo from './assets/UpLift_Logo.svg';
 
 //==========================
 //To do: 
+//  * Fix line 246; doesn't need arrow function
 //  * Add social share buttons
 //  * Add first page disclaimer (see Slack, "other" channel.)
 //  * Add "email me my results" button, hook up to MailChimp API
@@ -78,6 +79,7 @@ const NextButton = styled(Button)({
 //           className={classes.media}
 
 const theme = createMuiTheme({
+  spacing: 12,
   palette: {
     primary: {
       main: '#3cb4d3'
@@ -239,14 +241,16 @@ class MakeQuestion extends React.Component {
                   value={this.state.value}
                  />
               </Grid>
-             <NextButton 
+             {this.state.questionNumber < 9
+              ? <NextButton 
               color="primary" 
               variant="contained" 
-              onClick={() => this.updateQuestionNumber()}
+              onClick={this.updateQuestionNumber}
               disabled={this.state.disabled}
               >
                 Next
               </NextButton>
+              : null }
         </Grid>
     )
   }
@@ -282,7 +286,7 @@ function RenderOptions(props) {
     }
 
     const suicidal = props.answers[props.answers.length - 1] > 0
-    
+
     if (props.questionNumber >= props.questions.length) {
       const suicideWarning = suicidal ? <RenderSuicideDialog /> : null
       const finalScore = props.userScore;
@@ -453,6 +457,57 @@ function RenderSuicideDialog() {
   )
 }
 
+function RenderFirstPage(props) {
+  return(
+    <ThemeProvider theme={theme}>
+      <Box p={2} border={1} borderColor='#c7c4c4' borderRadius='4%' style={{margin:8}}>
+        <Typography paragraph='true'>
+          Welcome! This PHQ9-questionnaire is frequently used by doctors and therapists to help their patients measure their depressive symptoms. It can hopefully shed some light on your own mood.
+        </Typography>
+        <Typography paragraph='true'>
+          <b>Important note:</b> This assessment cannot diagnose you or offer medical advice. By using this website, you consent to the <a href='https://www.uplift.app/termsofuse' target='blank'>Terms of Service</a> and the <a href='https://www.uplift.app/privacypolicy' target='blank'>Privacy Policy</a> of <a href='https://www.uplift.app' target='blank'>UpLift</a>.
+        </Typography>
+        <NextButton color='primary' variant='contained' onClick={props.handleClick} style={{width:'100%', maxWidth:320}}>Begin</NextButton>
+    </Box>
+    </ThemeProvider>
+  )
+}
+
+class Content extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      count: 0
+    }
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick() {
+    let count = this.state.count;
+    count++;
+    this.setState({
+      count: count
+    })
+  }
+
+  render(){
+
+    return(
+      <div>
+        {this.state.count === 0
+        ? <RenderFirstPage handleClick={this.handleClick}/>
+        : <MakeQuestion 
+          questions={questionsPHQ9}
+          options={optionsPHQ9}
+          />
+        }
+      </div>
+
+    )
+  }
+
+}
+
 function App() {
   return (
         // 
@@ -460,11 +515,8 @@ function App() {
     <ThemeProvider theme={theme}>
     
       <RenderAppBar />
+      <Content />
 
-      <MakeQuestion 
-        questions={questionsPHQ9}
-        options={optionsPHQ9}
-         />
     </ThemeProvider>
 
     
