@@ -89,44 +89,44 @@ const questionsPHQ9 = ["Little interest or pleasure in doing things?", "Feeling 
 
 const optionsPHQ9 = ["Not at all", "Several days", "More than half the days", "Nearly every day"];
 
-class ResultsChart extends React.Component {
-  constructor(props) {
-    super(props);
+// class ResultsChart extends React.Component {
+//   constructor(props) {
+//     super(props);
 
-    this.state = {
-      options: {
-        chart: {
-          id: "results-chart",
-          toolbar: {
-            show: false
-          }
-        },
-        xaxis: {
-          categories: ["Your Score", "Highest Possible"]
-        },
-      colors: ['#3cb4d3']
-      }, 
-      series: [
-        {
-          name: "Score",
-          data: [this.props.finalScore, 27]
-        }
-      ]
-    };
-  }
+//     this.state = {
+//       options: {
+//         chart: {
+//           id: "results-chart",
+//           toolbar: {
+//             show: false
+//           }
+//         },
+//         xaxis: {
+//           categories: ["Your Score", "Highest Possible"]
+//         },
+//       colors: ['#3cb4d3']
+//       }, 
+//       series: [
+//         {
+//           name: "Score",
+//           data: [this.props.finalScore, 27]
+//         }
+//       ]
+//     };
+//   }
 
-    render(){
-      return(
-        <Grid item xs={12}>
-          <Chart 
-            options={this.state.options}
-            series={this.state.series}
-            type="bar"
-          />
-        </Grid>
-      )
-    }
-}
+//     render(){
+//       return(
+//         <Grid item xs={12}>
+//           <Chart 
+//             options={this.state.options}
+//             series={this.state.series}
+//             type="bar"
+//           />
+//         </Grid>
+//       )
+//     }
+// }
 
 class MakeQuestion extends React.Component {
   constructor(props) {
@@ -150,18 +150,6 @@ class MakeQuestion extends React.Component {
   maintainRenderer() {
     let questionNumber = this.state.questionNumber;
     let questionsDone = questionNumber < 9;
-    // let userScore = this.state.userScore;
-    // if (userScore < 5){
-
-    // } else if (userScore < 9) {
-
-    // } else if (userScore < 15) {
-
-    // } else if (userScore < 20) {
-
-    // } else {
-
-    // }
 
       return(
         <div>
@@ -191,10 +179,6 @@ class MakeQuestion extends React.Component {
     let disabled = this.state.disabled;
     let value = this.state.value;
     questionNumber++;
-    // if (questionNumber >= this.questions.length) {
-    //   alert('hey')
-    //   disabled = !disabled;
-    // } think through this; doesn't work. will have to do something with this...
     disabled = !disabled;
     value = 'disabled'
     this.setState({
@@ -210,7 +194,6 @@ class MakeQuestion extends React.Component {
     let answers = this.state.answers;
     let disabled = this.state.disabled;
     let value = this.state.value;
-    // let value = optionValue;
     answers[questionNumber] = score
     userScore += score;
     if (disabled = true) {
@@ -225,36 +208,8 @@ class MakeQuestion extends React.Component {
     })
   }
 
-  // updateQuestionNumber() {
-  //   let questionNumber = this.state.questionNumber;
-  //   questionNumber++;
-  //   this.setState({
-  //     questionNumber: questionNumber,
-  //   })
-  // }
-
-  // updateScore(score) {
-  //   let questionNumber = this.state.questionNumber;
-  //   let userScore = this.state.userScore;
-  //   let answers = this.state.answers;
-  //   answers[questionNumber] = score
-  //   userScore += score;
-  //   this.setState({
-  //       userScore: userScore,
-  //       answers: answers
-  //   })
-  // }
-
   render(){
     return(
-      // <Paper elevation={12} 	If you're concerned about your mental health, please talk to a health professional like your primary care physician to get a formal diagnosis and to discuss possible treatments.
-      // style={{
-      //   paddingTop:10,
-      //   marginTop:50,
-      //   paddingBottom:160,
-      //   marginLeft:10,
-      //   marginRight:10
-      //   }}>
         <Grid 
           container
           spacing={1}
@@ -284,23 +239,6 @@ class MakeQuestion extends React.Component {
                   value={this.state.value}
                  />
               </Grid>
-              {/* <Grid
-                item 
-                xs={12}
-                md={6}
-                lg={5}
-              >
-                <RenderOptions
-                  options={this.options}
-                  updateQuestionNumber={this.updateQuestionNumber}
-                  updateScore={this.updateScore}
-                  questionNumber={this.state.questionNumber}
-                  questions={this.questions}
-                  userScore={this.state.userScore}
-                  answers={this.state.answers}
-                  value={this.state.value}
-                 />
-                </Grid> */}
              <NextButton 
               color="primary" 
               variant="contained" 
@@ -310,7 +248,6 @@ class MakeQuestion extends React.Component {
                 Next
               </NextButton>
         </Grid>
-      // </Paper>  
     )
   }
 }
@@ -345,7 +282,7 @@ function RenderOptions(props) {
     }
 
     const suicidal = props.answers[props.answers.length - 1] > 0
-
+    
     if (props.questionNumber >= props.questions.length) {
       const suicideWarning = suicidal ? <RenderSuicideDialog /> : null
       const finalScore = props.userScore;
@@ -402,20 +339,7 @@ function RenderOptions(props) {
           style={{padding:8}}
           >
           <Card className={classes.choiceCards}>
-            {/* <CardContent className={cla(sses.choiceCardText}>
-              {option}
-            </CardContent>
-            <CardActionArea className={classes.radios}>
-              <Radio
-                color="primary"
-                className={classes.circle} 
-                // onChange={() => props.updateQuestionNumber(index)} this needs to just update their score.
-              />
-            </CardActionArea> */}
-              {/* <FormLabel component="legend">"Severe Mild Moderate"</FormLabel> */}
               <RadioGroup color="primary" className={classes.choiceCards} number={index} value={value} onChange={(e) => updateScore(index, e)}>
-              {/* <RadioGroup color="primary" className={classes.choiceCards} number={index} value={value} onChange={setValue}> */}
-              {/* Not sure why I can't set the value below to index... */}
                 <FormControlLabel className={classes.radios} number={index} value={option} control={<Radio color="primary" className={classes.circle}/>} label={<Typography className={classes.choiceText}>{option}</Typography>} labelPlacement="start" />
               </RadioGroup>
           </Card>

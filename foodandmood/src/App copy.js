@@ -1,13 +1,16 @@
 import React from 'react';
-import RenderAppBar from './components/AppBar';
-import RenderPaper from './components/Paper';
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
+import RenderAppBar from './components/AppBar'
+import RenderPaper from './components/Paper'
+import RenderImage from './components/Image'
 import RenderButton from './components/Button'
 import RenderButtonGroup from './components/ButtonGroup'
+//one way or the other, bundle all these so they can be in a single import statement
 import Food from './Chapters/food'
 import VitaminDOne from './Chapters/vitaminD'
 import AlcoholOne from './Chapters/alcohol'
 import TobaccoOne from './Chapters/tobacco'
-import { Typography } from '@material-ui/core';
+import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles'
 // import Chart from "react-apexcharts";
 import MenuIcon from '@material-ui/icons/Menu';
@@ -16,9 +19,23 @@ import './App.css';
 //import './App.css';
 // import { purple } from '@material-ui/core/colors';
 
+  // just keeping this as an example for setting up the router, as it did work well for that...
+  // function choice() {
+  //   return(
+  //     <Router>
+  //         <Button component={Link} to="/two" variant="contained" color="primary">
+  //           Explore
+  //         </Button>
+  //       <Route exact path="/two">
+  //         <PageTwo />
+  //       </Route>
+  //     </Router>
+  //   )
+  // }
 
 //_________________________________
 //        TO-DO:
+// * Fix desktop display
 // * Go through errors in console, see if any are worth looking into.
 // * Put in a simple router, see how that goes. Look at whether state can be saved when hopping between screens. 
 // * Make a theme-change feature to put in the menu.
