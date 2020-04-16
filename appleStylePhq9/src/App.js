@@ -1,26 +1,22 @@
 import React from 'react';
-import { Button, Grid, Typography, AppBar, Toolbar, IconButton, Paper, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Card, CardContent, CardActionArea, Radio, RadioGroup, SvgIcon, FormControl, FormLabel, FormControlLabel, Box, Divider, FormHelperText } from '@material-ui/core';
-import { ThemeProvider, createMuiTheme, useTheme, makeStyles, styled, withTheme } from '@material-ui/core/styles'
-import Chart from "react-apexcharts";
+import { Button, Grid, Typography, AppBar, Toolbar, Dialog, DialogContent, DialogContentText, DialogActions, Card, Radio, RadioGroup, FormControlLabel, Box, Divider, ThemeProvider, createMuiTheme, makeStyles, styled} from '@material-ui/core';
 import LinearGauge from './components/LinearGauge';
 import ScoreResponse from './components/ScoreResponse';
 import Resources from './components/Resources';
-import MenuIcon from '@material-ui/icons/Menu';
 import './App.css';
-import UpLiftLogo from './assets/UpLift_Logo.svg';
-//import { purple } from '@material-ui/core/colors';
 
-// https://apexcharts.com/docs/react-charts/
+
 
 //==========================
 //To do: 
-//  * Fix line 246; doesn't need arrow function
 //  * Add social share buttons
-//  * Add first page disclaimer (see Slack, "other" channel.)
 //  * Add "email me my results" button, hook up to MailChimp API
 //  * Read official bit on React animations, consider incorporating any that seem genuinely positive.
 //  * Read up on Webpack, clean up the imports via same.
 //  * clean up
+//  * Read up on Nginx - https://www.freecodecamp.org/news/an-introduction-to-nginx-for-developers-62179b6a458f/ - figure out how to serve. 
+//      * DO - https://stackoverflow.com/questions/44278748/how-to-deploy-create-react-app-on-digital-ocean
+//      * check out for Firebase (see create-react-app deploy page)
 //==========================
 
 //Optional To-Do
@@ -69,14 +65,6 @@ const NextButton = styled(Button)({
   color: 'white'
 })
 
-// export default function MediaCard() {
-//   const classes = useStyles();
-
-//   return (
-//     <Card className={classes.root}>
-//       <CardActionArea>
-//         <CardMedia
-//           className={classes.media}
 
 const theme = createMuiTheme({
   spacing: 12,
@@ -91,45 +79,6 @@ const theme = createMuiTheme({
 const questionsPHQ9 = ["Little interest or pleasure in doing things?", "Feeling down, depressed, or hopeless?", "Trouble falling or staying asleep, or sleeping too much?", "Feeling tired or having little energy?", "Poor appetite or overeating?", "Feeling bad about yourself - or that you are a failure or have let yourself or your family down?", "Trouble concentrating on things, such as reading or watching TV?", "Moving or speaking so slowly that other people could've noticed? Or the opposite - being much more fidgety or restless than usual?", "Thoughts about just wanting to fall asleep and not wake up, harming yourself, or killing yourself?"]
 
 const optionsPHQ9 = ["Not at all", "Several days", "More than half the days", "Nearly every day"];
-
-// class ResultsChart extends React.Component {
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       options: {
-//         chart: {
-//           id: "results-chart",
-//           toolbar: {
-//             show: false
-//           }
-//         },
-//         xaxis: {
-//           categories: ["Your Score", "Highest Possible"]
-//         },
-//       colors: ['#3cb4d3']
-//       }, 
-//       series: [
-//         {
-//           name: "Score",
-//           data: [this.props.finalScore, 27]
-//         }
-//       ]
-//     };
-//   }
-
-//     render(){
-//       return(
-//         <Grid item xs={12}>
-//           <Chart 
-//             options={this.state.options}
-//             series={this.state.series}
-//             type="bar"
-//           />
-//         </Grid>
-//       )
-//     }
-// }
 
 class MakeQuestion extends React.Component {
   constructor(props) {
@@ -199,7 +148,7 @@ class MakeQuestion extends React.Component {
     let value = this.state.value;
     answers[questionNumber] = score
     userScore += score;
-    if (disabled = true) {
+    if (disabled === true) {
       disabled = !disabled;
     }
     value = optionValue;
@@ -360,29 +309,7 @@ function RenderOptions(props) {
 }
 
 function RenderAppBar(props){
-  // set up a hook for anchorEl
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [open, setOpen] = React.useState(false);
 
-  const openMenu = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const closeMenu = () => {
-    setAnchorEl(null);
-  };
-
-  const openDialog = () => {
-    setOpen(true);
-    closeMenu();
-  }
-
-  const closeDialog = () => {
-    setOpen(false);
-  }
-
-  const theme = useTheme();
- 
   const styles = props.styles;
 
   //I'd much prefer the icon below wrapped in SvgIcon, but it's refusing to import it. I believe it's an issue with webpack. https://material-ui.com/components/icons/#material-icons
@@ -391,34 +318,8 @@ function RenderAppBar(props){
     <AppBar style={styles} color="transparent" elevation="0" position="static">
     <Toolbar variant="dense">
       <span>
-        <img style={{width:80, marginTop:10}} src={require('./assets/UpLift_Logo.svg')} />
+        <img style={{width:80, marginTop:10}} src={require('./assets/UpLift_Logo.svg')} alt=""/>
       </span>
-
-      {/* <IconButton edge="start" aria-label="menu">
-        <MenuIcon aria-controls="simple-menu" aria-haspopup="true" onClick={openMenu} />
-        <Menu
-        id="help-menu"
-        anchorEl={anchorEl}
-        keepMounted //keepMounted is a property of Modal
-        open={Boolean(anchorEl)} //exists based on the existence of anchorEl, set by openMenu and closeMenu
-        onClose={closeMenu}
-        >
-          <MenuItem onClick={openDialog}>What is this?</MenuItem>
-          <Dialog onClose={closeDialog} aria-labelledby="what-is-this" open={open}>
-              <DialogTitle id="what-is-this">What is this?</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  The PHQ9 is a tool for evaluating depression that has been clinically validated and is widely used by therapists. However, it's not an adequate diagnostic tool on its own. If you think you might be dealing with depression, we encourage you to consult with a quaified therapist.                 
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={closeDialog} color="primary">
-                  Close
-                </Button>   
-              </DialogActions>
-          </Dialog>
-      </Menu>
-      </IconButton> */}
     </Toolbar>
   </AppBar>
   )
@@ -491,10 +392,10 @@ function RenderFirstPage(props) {
                     <RenderAppBar styles={styles} />
      <Box p={2} border={1} borderColor='#c7c4c4' borderRadius='11px' m={1} style={{backgroundColor:'white'}}>
         <Typography variant='h5' paragraph='true' align='center'>
-          The PHQ-9 Depression Questionnaire
+          Depression Test
         </Typography>
         <Typography paragraph='true'>
-          Welcome! The PHQ9-questionnaire is frequently used by doctors and therapists to help their patients measure their depressive symptoms. It can hopefully shed some light on your own mood.
+          Welcome! This PHQ-9 questionnaire is frequently used by doctors and therapists to screen for depression. It can hopefully shed some light on your own mood.
         </Typography>
         <Divider style={{marginBottom:16}}/>
         <Typography paragraph='true'>
@@ -502,7 +403,7 @@ function RenderFirstPage(props) {
         </Typography>
         <Grid style={{display:'flex', justifyContent:'center'}}><NextButton color='primary' variant='contained' onClick={props.handleClick} style={{width:'90%', maxWidth:320}}>Begin</NextButton></Grid>
     </Box>
-    <Typography variant='caption' align='center' style={{display:'flex', justifyContent: 'space-around', margin:'16px 12px'}}> 
+    <Typography variant='caption' align='center' style={{display:'flex', justifyContent: 'space-around', margin:'16px 48px'}}> 
           <a href='https://www.uplift.app/privacypolicy' target='blank'>Privacy Policy</a>   <a href='https://www.uplift.app/termsofuse' target='blank'>Terms of Service</a>
         </Typography>
     </Grid>

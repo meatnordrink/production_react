@@ -1,9 +1,175 @@
 import React from 'react';
-import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails  } from '@material-ui/core';
+import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, styled  } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import parse from 'html-react-parser';
+
+import { FormControl, InputLabel, Input, FormHelperText } from '@material-ui/core';
+
+import Mailchimp from 'react-mailchimp-form';
+import { useMailchimp } from 'react-use-mailchimp';
+
+// const NextButton = styled(Button)({
+//     width: 320,
+//     borderRadius: 11,
+//     fontSize: 14,depSeverity = this.props.depSeverity;
+//     marginTop: '3vw',
+//     padding: 10,
+//     color: 'white'
+//   })
+
+// function PrintButton(depSeverity) {
+
+//     return(
 
 
 
+
+class Signup extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {value: ''};
+  
+      this.handleChange = this.handleChange.bind(this);
+    //   this.handleSubmit = this.handleSubmit.bind(this);
+    }
+  
+    handleChange(event) {
+      this.setState({value: event.target.value});
+    //   event.preventDefault();
+    }
+  
+    // handleSubmit(event) {
+    // //   alert('A name was submitted: ' + this.state.value);
+    //     // event.preventDefault();
+    // //     fetch("https://app.us19.list-manage.com/subscribe/post", {
+    // //         method: "post",
+    // //         headers: {"Content-Type": "application/json"},
+    // //         body: JSON.stringify({
+    // //             u: "57db9f19d7709b29b5b8123ad",
+    // //             id: "8eb22cf76b",
+    // //             MERGE0: "reactWorked@fakdle.com",
+    // //             GIVEAWAY: "DepressionTest",
+    // //             PHQ9VALUE: "severe"
+          
+    // //     })
+    // //   })
+    // }
+
+    // render() {
+    //     return(
+    //     <form onSubmit={this.handleSubmit}>
+    //       <label>
+    //         Email:
+    //         <input type="email" autocapitalize="off" autocorrect="off" size="25" value={this.state.value} onChange={this.handleChange}></input>
+    //       </label>
+    //       <input type="submit" value="Submit" />
+    //     </form>
+    //     )
+    // }
+    render() {
+        return(
+        <div id="mc_embed_signup">
+		<form action="https://app.us19.list-manage.com/subscribe/post" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" noValidate>
+			<div id="mc_embed_signup_scroll">
+		<div className="mc-field-group">
+			<label htmlFor="mce-EMAIL">Email Address </label>
+			<input type="email" value="" name="EMAIL" className="required email" id="mce-EMAIL" value={this.state.value} onChange={this.handleChange}/>
+            <input type="hidden" name="u" value="57db9f19d7709b29b5b8123ad" />
+            <input type="hidden" name="id" value="8eb22cf76b"></input>
+			<input type="hidden" name="GIVEAWAY" value="DepressionTest" />
+			<input type="hidden" name="PHQ9VALUE" value="severe" />
+		</div>
+        <div className="clear"><input type="submit" value="Submit" name="subscribe" id="mc-embedded-subscribe" className="button" /></div>
+			</div>
+		</form>
+		</div>
+
+		/* <script type='text/javascript' src='https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script> */
+        )
+    }
+}
+{/* 
+    render() {
+      return (
+        <div id="mc_embed_signup">
+        <form action="https://app.us19.list-manage.com/subscribe/post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" method="POST" onSubmit={this.handleSubmit} noValidate>
+          <label>
+            Email:
+            <input type="email" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" size="25" value={this.state.value} onChange={this.handleChange}></input>
+          </label>
+          <input type="hidden" name="u" value="57db9f19d7709b29b5b8123ad" />
+            <input type="hidden" name="id" value="8eb22cf76b"></input>
+          <input type="hidden" name="GIVEAWAY" value="DepressionTest" />
+          <input type="hidden" name="PHQ9VALUE" value="severe" />
+
+          <div className="mc-field-group input-group" style={{display:'none'}}>
+			<strong>UpLift Blog </strong>
+			<ul>
+                <li><input type="checkbox" value="32" name="group[4851][64]" id="mce-group[4851]-4851-0" checked /><label for="mce-group[4851]-4851-0">Depression Test</label></li>
+		</ul>
+		</div>
+			<div id="mce-responses" className="clear">
+				<div className="response" id="mce-error-response" style={{display:'none'}}></div>
+				<div className="response" id="mce-success-response" style={{display:'none'}}></div>
+			</div> 
+
+			<div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true"><input type="text" name="b_57db9f19d7709b29b5b8123ad_8eb22cf76b" tabindex="-1" value="" />
+
+            </div>
+			<div className="clear"><input type="submit" value="Submit" name="subscribe" id="mc-embedded-subscribe" className="button" /></div>
+
+        </form>
+
+        <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+
+        </div>
+      );
+    }
+   } 
+ */}
+  
+
+{/* <form >
+    <input type="hidden" name="u" value="57db9f19d7709b29b5b8123ad">
+    <input type="hidden" name="id" value="8eb22cf76b"></input>
+
+    <input type="email" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" size="25" value=""> */}
+
+{// class Signup extends React.Component {
+//     depSeverity = this.props.depSeverity;
+
+//     render() {
+        
+//       return (
+//           <Mailchimp
+//           action='https://app.us19.list-manage.com/subscribe/post?u=57db9f19d7709b29b5b8123ad&amp;id=8eb22cf76b'
+//           fields={[
+//             {
+//               name: 'EMAIL',
+//               placeholder: 'Email',
+//               type: 'email',
+//               required: true
+//             },
+//             {
+//               name: 'GIVEAWAY',
+//               type: 'hidden',
+//               value: 'DepressionTest'              
+//             },
+//             {
+//               name: 'PHQ9VALUE',
+//               type: 'hidden',
+//               value: 'severe'              
+//             },            
+//           ]}
+//           />
+//       );
+//     }
+//   }
+  
+
+//         //         <input type="hidden" name="GIVEAWAY" value="DepressionTest" />
+//         //         <input type="hidden" name="PHQ9VALUE" value={depSeverity} />
+}
 export default function(props) {
     let depSeverity = props.depSeverity;
     let suicidal = props.suicidal;
@@ -86,6 +252,7 @@ export default function(props) {
     return(
         <div>
             {panels}
+            <Signup />
         </div>
     )
 }
