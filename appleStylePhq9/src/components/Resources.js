@@ -27,33 +27,43 @@ import { useMailchimp } from 'react-use-mailchimp';
 class Signup extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {value: ''};
+      this.state = {
+          value: '', 
+          formDisplay: 'inherit', 
+          thanksDisplay: 'none'
+        };
   
       this.handleChange = this.handleChange.bind(this);
-    //   this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
   
+
     handleChange(event) {
       this.setState({value: event.target.value});
     //   event.preventDefault();
     }
   
-    // handleSubmit(event) {
-    // //   alert('A name was submitted: ' + this.state.value);
-    //     // event.preventDefault();
-    // //     fetch("https://app.us19.list-manage.com/subscribe/post", {
-    // //         method: "post",
-    // //         headers: {"Content-Type": "application/json"},
-    // //         body: JSON.stringify({
-    // //             u: "57db9f19d7709b29b5b8123ad",
-    // //             id: "8eb22cf76b",
-    // //             MERGE0: "reactWorked@fakdle.com",
-    // //             GIVEAWAY: "DepressionTest",
-    // //             PHQ9VALUE: "severe"
+    handleSubmit(event) {
+        alert(this.props.depSeverity)
+        this.setState({formDisplay: 'none', thanksDisplay: 'flex'})
+        // alert('A name was submitted: ' + this.state.value);
+        // setTimeout(this.setState({value: ""}), 500);
+        // this.setState({value: ""});
+
+        // event.preventDefault();
+    //     fetch("https://app.us19.list-manage.com/subscribe/post", {
+    //         method: "post",
+    //         headers: {"Content-Type": "application/json"},
+    //         body: JSON.stringify({
+    //             u: "57db9f19d7709b29b5b8123ad",
+    //             id: "8eb22cf76b",
+    //             MERGE0: "reactWorked@fakdle.com",
+    //             GIVEAWAY: "DepressionTest",
+    //             PHQ9VALUE: "severe"intentional
           
-    // //     })
-    // //   })
-    // }
+    //     })
+    //   })
+    }
 
     // render() {
     //     return(
@@ -61,29 +71,35 @@ class Signup extends React.Component {
     //       <label>
     //         Email:
     //         <input type="email" autocapitalize="off" autocorrect="off" size="25" value={this.state.value} onChange={this.handleChange}></input>
-    //       </label>
+    //       </label>Resources
     //       <input type="submit" value="Submit" />
     //     </form>
     //     )
     // }
     render() {
         return(
+           <> 
         <div id="mc_embed_signup">
-		<form action="https://app.us19.list-manage.com/subscribe/post" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" noValidate>
+		<form action="https://app.us19.list-manage.com/subscribe/post-json" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="hiddenFrame" noValidate onSubmit={this.handleSubmit} style={{display:`${this.state.formDisplay}`}}>
 			<div id="mc_embed_signup_scroll">
 		<div className="mc-field-group">
 			<label htmlFor="mce-EMAIL">Email Address </label>
 			<input type="email" value="" name="EMAIL" className="required email" id="mce-EMAIL" value={this.state.value} onChange={this.handleChange}/>
             <input type="hidden" name="u" value="57db9f19d7709b29b5b8123ad" />
             <input type="hidden" name="id" value="8eb22cf76b"></input>
+            <input type="hidden" name="c" value="" />
 			<input type="hidden" name="GIVEAWAY" value="DepressionTest" />
-			<input type="hidden" name="PHQ9VALUE" value="severe" />
+			<input type="hidden" name="PHQ9VALUE" value={this.props.depSeverity} />
 		</div>
+        {/* <div className="response" id="mce-error-response" style={{display: 'none'}}></div> */}
         <div className="clear"><input type="submit" value="Submit" name="subscribe" id="mc-embedded-subscribe" className="button" /></div>
 			</div>
 		</form>
+            <Typography variant='h6' color='primary' style={{display: `${this.state.thanksDisplay}`}}>Thanks!</Typography>
 		</div>
-
+        <iframe name="hiddenFrame" src="about:blank" style={{display:'none'}}></iframe>
+        </>
+        
 		/* <script type='text/javascript' src='https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script> */
         )
     }
@@ -144,7 +160,7 @@ class Signup extends React.Component {
 //           <Mailchimp
 //           action='https://app.us19.list-manage.com/subscribe/post?u=57db9f19d7709b29b5b8123ad&amp;id=8eb22cf76b'
 //           fields={[
-//             {
+//             {Resources
 //               name: 'EMAIL',
 //               placeholder: 'Email',
 //               type: 'email',
@@ -252,7 +268,7 @@ export default function(props) {
     return(
         <div>
             {panels}
-            <Signup />
+            <Signup depSeverity={depSeverity}/>
         </div>
     )
 }
