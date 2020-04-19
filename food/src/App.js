@@ -3,6 +3,7 @@ import RenderAppBar from './components/AppBar';
 import RenderPaper from './components/Paper';
 import RenderButton from './components/Button'
 import RenderButtonGroup from './components/ButtonGroup'
+import RenderNavigation from './components/Navigation'
 import Food from './Chapters/food'
 import VitaminDOne from './Chapters/vitaminD'
 import AlcoholOne from './Chapters/alcohol'
@@ -23,6 +24,7 @@ import './App.css';
 // * Put in a simple router, see how that goes. Look at whether state can be saved when hopping between screens. 
 // * Make a theme-change feature to put in the menu.
 // * Consider replacing dropdowns-within-dropdowns with dialogs or something else. 
+// * Find a tutorial on webpack; clean up imports so I can import all local imports from a single line, at least per-folder. 
 //_________________________________
 
 const theme = createMuiTheme({
@@ -131,6 +133,7 @@ function App() {
    
       <RenderAppBar />
       <Screen />
+      <RenderNavigation />
     </ThemeProvider>
 
     

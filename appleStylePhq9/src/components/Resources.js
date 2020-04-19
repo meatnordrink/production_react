@@ -87,7 +87,7 @@ class Signup extends React.Component {
 			<input type="email" value="" name="EMAIL" className="required email" id="mce-EMAIL" value={this.state.value} onChange={this.handleChange}/>
             <input type="hidden" name="u" value="57db9f19d7709b29b5b8123ad" />
             <input type="hidden" name="id" value="8eb22cf76b"></input>
-            <input type="hidden" name="c" value="" />
+            <input type="hidden" name="c" value="?" />
 			<input type="hidden" name="GIVEAWAY" value="DepressionTest" />
 			<input type="hidden" name="PHQ9VALUE" value={this.props.depSeverity} />
 		</div>
