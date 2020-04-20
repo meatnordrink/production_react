@@ -1,27 +1,9 @@
 import React from 'react';
 import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import parse from 'html-react-parser';
+import '../assets/mailchimp.css'
 
-import { FormControl, InputLabel, Input, FormHelperText } from '@material-ui/core';
-
-import Mailchimp from 'react-mailchimp-form';
-import { useMailchimp } from 'react-use-mailchimp';
-
-// const NextButton = styled(Button)({
-//     width: 320,
-//     borderRadius: 11,
-//     fontSize: 14,depSeverity = this.props.depSeverity;
-//     marginTop: '3vw',
-//     padding: 10,
-//     color: 'white'
-//   })
-
-// function PrintButton(depSeverity) {
-
-//     return(
-
-
+import { InputLabel } from '@material-ui/core';
 
 
 class Signup extends React.Component {
@@ -54,15 +36,14 @@ class Signup extends React.Component {
             event.preventDefault();
 
         }
-        this.setState({formDisplay: 'none', thanksDisplay: 'flex'})
+        this.setState({formDisplay: 'none', thanksDisplay: 'inline-block'})
     }
 
     render() {
         return(
            <> 
         <div id="mc_embed_signup">
-		<form action="https://app.us19.list-manage.com/subscribe/post-json" method="post" id="mc-embedded-subscribe-form" name="mcSubscribeForm" className="validate" target="hiddenFrame" noValidate onSubmit={this.handleSubmit} style={{display:`${this.state.formDisplay}`}}>
-			<div id="mc_embed_signup_scroll">
+		<form action="https://app.us19.list-manage.com/subscribe/post-json" method="post" id="mcSubscribeForm" name="mcSubscribeForm" className="validate" target="hiddenFrame" noValidate onSubmit={this.handleSubmit} style={{display:`${this.state.formDisplay}`}}>
 		<div className="mc-field-group">
 			<InputLabel style={{color: 'black'}} htmlFor="mce-EMAIL">Email me my results</InputLabel>
 			<input type="email" placeholder="Please enter your email" name="EMAIL" className="required email" id="mce-EMAIL" value={this.state.value} onChange={this.handleChange}/>
@@ -71,40 +52,21 @@ class Signup extends React.Component {
             <input type="hidden" name="c" value="?" />
 			<input type="hidden" name="GIVEAWAY" value="DepressionTest" />
 			<input type="hidden" name="PHQ9VALUE" value={this.props.depSeverity} />
-            {/* to deal with cheap ham */}
 			<div style={{position: 'absolute', left: '-5000px'}} ariahidden="true">
                 <input type="text" id="b_57db9f19d7709b29b5b8123ad_8eb22cf76b" name="b_57db9f19d7709b29b5b8123ad_8eb22cf76b" tabIndex="-1" value={this.state.cheapHamValue} onChange={this.handleCheapHam}/>
             </div>
-            </div>
 		</div>
-        {/* <div className="response" id="mce-error-response" style={{display: 'none'}}></div> */}
-        <div className="clear"><input type="submit" value="Submit" name="subscribe" id="mc-embedded-subscribe" className="button" /></div>
+        <input type="submit" value="Submit" name="subscribe" id="mc-embedded-subscribe" className="button" />
 
 		</form>
-            <Typography variant='h6' color='primary' style={{display: `${this.state.thanksDisplay}`}}>Your results have been sent.</Typography>
+            <Typography variant='body1' style={{display: `${this.state.thanksDisplay}`, marginTop: '2vh'}}>Your results have been sent. </Typography>
+            <Typography variant='body1' style={{display: `${this.state.thanksDisplay}`, marginTop: '1vh'}}>Click <a href="https://app.us19.list-manage.com/unsubscribe?u=57db9f19d7709b29b5b8123ad&id=8eb22cf76b" target="_blank">here</a> to opt of occasional future emails with resources to feel happier, less stressed, and more in control of your mood.</Typography>
 		</div>
         <iframe name="hiddenFrame" src="about:blank" style={{display:'none'}}></iframe>
         </>
-        
-		/* <script type='text/javascript' src='https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script> */
-        )
+      
+       )
     }
-
-    // render() {
-    //     return(
-    //         <form form action="https://app.us19.list-manage.com/subscribe/post-json" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="hiddenFrame" noValidate onSubmit={this.handleSubmit} style={{display:`${this.state.formDisplay}`}}>
-    //         <InputLabel htmlFor="my-input">Email address</InputLabel>
-    //         <Input type='email' value={this.state.value} id='email' name='email' onChange={this.handleChange}/>
-    //         <Input type="hidden" name="u" value="57db9f19d7709b29b5b8123ad" />
-    //         <Input type="hidden" name="id" value="8eb22cf76b" />
-    //         <Input type="hidden" name="c" value="?" />
-	// 		<Input type="hidden" name="GIVEAWAY" value="DepressionTest" />
-	// 		<Input type="hidden" name="PHQ9VALUE" value={this.props.depSeverity} />
-    //         <Input type='submit' value='Submit' name='subscribe' />
-
-    //     </form>
-    //     )
-    // }
 
 }
 
