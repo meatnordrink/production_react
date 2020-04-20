@@ -40,42 +40,14 @@ class Signup extends React.Component {
 
     handleChange(event) {
       this.setState({value: event.target.value});
-    //   event.preventDefault();
+
     }
   
     handleSubmit(event) {
         alert(this.props.depSeverity)
         this.setState({formDisplay: 'none', thanksDisplay: 'flex'})
-        // alert('A name was submitted: ' + this.state.value);
-        // setTimeout(this.setState({value: ""}), 500);
-        // this.setState({value: ""});
-
-        // event.preventDefault();
-    //     fetch("https://app.us19.list-manage.com/subscribe/post", {
-    //         method: "post",
-    //         headers: {"Content-Type": "application/json"},
-    //         body: JSON.stringify({
-    //             u: "57db9f19d7709b29b5b8123ad",
-    //             id: "8eb22cf76b",
-    //             MERGE0: "reactWorked@fakdle.com",
-    //             GIVEAWAY: "DepressionTest",
-    //             PHQ9VALUE: "severe"intentional
-          
-    //     })
-    //   })
     }
 
-    // render() {
-    //     return(
-    //     <form onSubmit={this.handleSubmit}>
-    //       <label>
-    //         Email:
-    //         <input type="email" autocapitalize="off" autocorrect="off" size="25" value={this.state.value} onChange={this.handleChange}></input>
-    //       </label>Resources
-    //       <input type="submit" value="Submit" />
-    //     </form>
-    //     )
-    // }
     render() {
         return(
            <> 
