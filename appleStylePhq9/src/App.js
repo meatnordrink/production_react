@@ -84,7 +84,7 @@ class MakeQuestion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionNumber: 0,
+      questionNumber: 8,
       userScore: 0,
       answers: [],
       disabled: true,

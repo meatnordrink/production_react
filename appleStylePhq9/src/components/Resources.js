@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, styled  } from '@material-ui/core';
+import { Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import parse from 'html-react-parser';
 
@@ -29,11 +29,13 @@ class Signup extends React.Component {
       super(props);
       this.state = {
           value: '', 
+          cheapHamValue: '',
           formDisplay: 'inherit', 
           thanksDisplay: 'none'
         };
   
       this.handleChange = this.handleChange.bind(this);
+      this.handleCheapHam = this.handleCheapHam.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
   
@@ -42,9 +44,16 @@ class Signup extends React.Component {
       this.setState({value: event.target.value});
 
     }
+
+    handleCheapHam(event) {
+        this.setState({cheapHamValue: event.target.value})
+    }
   
     handleSubmit(event) {
-        alert(this.props.depSeverity)
+        if (this.state.cheapHamValue != ""){
+            event.preventDefault();
+
+        }
         this.setState({formDisplay: 'none', thanksDisplay: 'flex'})
     }
 
@@ -52,22 +61,27 @@ class Signup extends React.Component {
         return(
            <> 
         <div id="mc_embed_signup">
-		<form action="https://app.us19.list-manage.com/subscribe/post-json" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="hiddenFrame" noValidate onSubmit={this.handleSubmit} style={{display:`${this.state.formDisplay}`}}>
+		<form action="https://app.us19.list-manage.com/subscribe/post-json" method="post" id="mc-embedded-subscribe-form" name="mcSubscribeForm" className="validate" target="hiddenFrame" noValidate onSubmit={this.handleSubmit} style={{display:`${this.state.formDisplay}`}}>
 			<div id="mc_embed_signup_scroll">
 		<div className="mc-field-group">
-			<label htmlFor="mce-EMAIL">Email Address </label>
-			<input type="email" value="" name="EMAIL" className="required email" id="mce-EMAIL" value={this.state.value} onChange={this.handleChange}/>
+			<InputLabel style={{color: 'black'}} htmlFor="mce-EMAIL">Email me my results</InputLabel>
+			<input type="email" placeholder="Please enter your email" name="EMAIL" className="required email" id="mce-EMAIL" value={this.state.value} onChange={this.handleChange}/>
             <input type="hidden" name="u" value="57db9f19d7709b29b5b8123ad" />
-            <input type="hidden" name="id" value="8eb22cf76b"></input>
+            <input type="hidden" name="id" value="8eb22cf76b" />
             <input type="hidden" name="c" value="?" />
 			<input type="hidden" name="GIVEAWAY" value="DepressionTest" />
 			<input type="hidden" name="PHQ9VALUE" value={this.props.depSeverity} />
+            {/* to deal with cheap ham */}
+			<div style={{position: 'absolute', left: '-5000px'}} ariahidden="true">
+                <input type="text" id="b_57db9f19d7709b29b5b8123ad_8eb22cf76b" name="b_57db9f19d7709b29b5b8123ad_8eb22cf76b" tabIndex="-1" value={this.state.cheapHamValue} onChange={this.handleCheapHam}/>
+            </div>
+            </div>
 		</div>
         {/* <div className="response" id="mce-error-response" style={{display: 'none'}}></div> */}
         <div className="clear"><input type="submit" value="Submit" name="subscribe" id="mc-embedded-subscribe" className="button" /></div>
-			</div>
+
 		</form>
-            <Typography variant='h6' color='primary' style={{display: `${this.state.thanksDisplay}`}}>Thanks!</Typography>
+            <Typography variant='h6' color='primary' style={{display: `${this.state.thanksDisplay}`}}>Your results have been sent.</Typography>
 		</div>
         <iframe name="hiddenFrame" src="about:blank" style={{display:'none'}}></iframe>
         </>
@@ -75,89 +89,26 @@ class Signup extends React.Component {
 		/* <script type='text/javascript' src='https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script> */
         )
     }
+
+    // render() {
+    //     return(
+    //         <form form action="https://app.us19.list-manage.com/subscribe/post-json" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="hiddenFrame" noValidate onSubmit={this.handleSubmit} style={{display:`${this.state.formDisplay}`}}>
+    //         <InputLabel htmlFor="my-input">Email address</InputLabel>
+    //         <Input type='email' value={this.state.value} id='email' name='email' onChange={this.handleChange}/>
+    //         <Input type="hidden" name="u" value="57db9f19d7709b29b5b8123ad" />
+    //         <Input type="hidden" name="id" value="8eb22cf76b" />
+    //         <Input type="hidden" name="c" value="?" />
+	// 		<Input type="hidden" name="GIVEAWAY" value="DepressionTest" />
+	// 		<Input type="hidden" name="PHQ9VALUE" value={this.props.depSeverity} />
+    //         <Input type='submit' value='Submit' name='subscribe' />
+
+    //     </form>
+    //     )
+    // }
+
 }
-{/* 
-    render() {
-      return (
-        <div id="mc_embed_signup">
-        <form action="https://app.us19.list-manage.com/subscribe/post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" method="POST" onSubmit={this.handleSubmit} noValidate>
-          <label>
-            Email:
-            <input type="email" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" size="25" value={this.state.value} onChange={this.handleChange}></input>
-          </label>
-          <input type="hidden" name="u" value="57db9f19d7709b29b5b8123ad" />
-            <input type="hidden" name="id" value="8eb22cf76b"></input>
-          <input type="hidden" name="GIVEAWAY" value="DepressionTest" />
-          <input type="hidden" name="PHQ9VALUE" value="severe" />
 
-          <div className="mc-field-group input-group" style={{display:'none'}}>
-			<strong>UpLift Blog </strong>
-			<ul>
-                <li><input type="checkbox" value="32" name="group[4851][64]" id="mce-group[4851]-4851-0" checked /><label for="mce-group[4851]-4851-0">Depression Test</label></li>
-		</ul>
-		</div>
-			<div id="mce-responses" className="clear">
-				<div className="response" id="mce-error-response" style={{display:'none'}}></div>
-				<div className="response" id="mce-success-response" style={{display:'none'}}></div>
-			</div> 
 
-			<div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true"><input type="text" name="b_57db9f19d7709b29b5b8123ad_8eb22cf76b" tabindex="-1" value="" />
-
-            </div>
-			<div className="clear"><input type="submit" value="Submit" name="subscribe" id="mc-embedded-subscribe" className="button" /></div>
-
-        </form>
-
-        <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
-
-        </div>
-      );
-    }
-   } 
- */}
-  
-
-{/* <form >
-    <input type="hidden" name="u" value="57db9f19d7709b29b5b8123ad">
-    <input type="hidden" name="id" value="8eb22cf76b"></input>
-
-    <input type="email" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" size="25" value=""> */}
-
-{// class Signup extends React.Component {
-//     depSeverity = this.props.depSeverity;
-
-//     render() {
-        
-//       return (
-//           <Mailchimp
-//           action='https://app.us19.list-manage.com/subscribe/post?u=57db9f19d7709b29b5b8123ad&amp;id=8eb22cf76b'
-//           fields={[
-//             {Resources
-//               name: 'EMAIL',
-//               placeholder: 'Email',
-//               type: 'email',
-//               required: true
-//             },
-//             {
-//               name: 'GIVEAWAY',
-//               type: 'hidden',
-//               value: 'DepressionTest'              
-//             },
-//             {
-//               name: 'PHQ9VALUE',
-//               type: 'hidden',
-//               value: 'severe'              
-//             },            
-//           ]}
-//           />
-//       );
-//     }
-//   }
-  
-
-//         //         <input type="hidden" name="GIVEAWAY" value="DepressionTest" />
-//         //         <input type="hidden" name="PHQ9VALUE" value={depSeverity} />
-}
 export default function(props) {
     let depSeverity = props.depSeverity;
     let suicidal = props.suicidal;
