@@ -1,7 +1,7 @@
 {
     "AWSEBDockerrunVersion": "1",
     "Image": {
-      "Name": "meatnordrink/muiphq",
+      "Name": "meatnordrink/food2",
       "Update": "true"
     },
     "Ports": [

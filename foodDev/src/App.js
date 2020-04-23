@@ -3,7 +3,6 @@ import RenderAppBar from './components/AppBar';
 import RenderPaper from './components/Paper';
 import RenderButton from './components/Button'
 import RenderButtonGroup from './components/ButtonGroup'
-import RenderNavigation from './components/Navigation'
 import Food from './Chapters/food'
 import VitaminDOne from './Chapters/vitaminD'
 import AlcoholOne from './Chapters/alcohol'
@@ -67,20 +66,20 @@ class Screen extends React.Component{
     let pageToRender = pages[this.state.page]
 
     return(
+      <Grid 
+      container
+      direction="column"
+      alignItems="center"
+      >
         <Grid 
-        container
-        direction="column"
-        alignItems="center"
-        >
-          <Grid 
-           item 
-           alignContent="center"
-           md={10}
-           lg={8}
-           >
-            {pageToRender}
-          </Grid>
+         item 
+         alignContent="center"
+         md={10}
+         lg={8}
+         >
+          {pageToRender}
         </Grid>
+      </Grid>
     )
   }
 
@@ -144,7 +143,6 @@ function App() {
    
       <RenderAppBar />
       <Screen />
-      {/* <RenderNavigation /> */}
     </ThemeProvider>
 
     
