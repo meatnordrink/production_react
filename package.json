@@ -1,0 +1,28 @@
+{
+  "name": "react_apps",
+  "version": "1.0.0",
+  "description": "React Apps",
+  "main": "index.js",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "forever": "^2.0.0",
+    "helmet": "^3.22.0",
+    "path": "^0.12.7",
+    "react-router-dom": "^5.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meatnordrink/React_Apps.git"
+  },
+  "author": "Andrew",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meatnordrink/React_Apps/issues"
+  },
+  "homepage": "https://github.com/meatnordrink/React_Apps#readme"
+}
