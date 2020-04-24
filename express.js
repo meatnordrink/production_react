@@ -19,7 +19,9 @@ app.use(express.static(path.join(__dirname, 'appleBuild', 'build')));
 //create http app to handle verification challenges and redirect other requests to https
 const httpApp = express();
 
-httpApp.use("/.well-known", express.static(path.join(__dirname, 'appleBuild', 'build')));
+httpApp.use("/.well-known", express.static(path.join(__dirname, 'appleBuild', 'build', '.well-known'), {
+    dotfiles: "allow"
+}));
 
 httpApp.use((req, res) => {
     res.redirect("https://" + req.hostname + req.url);
