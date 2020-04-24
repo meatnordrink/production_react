@@ -9,7 +9,8 @@
     "forever": "^2.0.0",
     "helmet": "^3.22.0",
     "path": "^0.12.7",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "serve-static": "^1.14.1"
   },
   "devDependencies": {},
   "scripts": {

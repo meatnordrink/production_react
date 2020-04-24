@@ -1,9 +1,11 @@
 let express = require("express")
-let path = require("path");
+let serveStatic = require("serve-static");
 app = express()
-app.use("/.well-known", express.static(path.join(__dirname, ".well-known"), {
-    dotfiles: "allow"
-}))
-app.use(express.static(path.join(__dirname, "text.txt")));
+
+app.use("/.well-known", serveStatic("./.well-known/", {
+	dotfiles: "allow",
+}));
+
+app.use(serveStatic("./text.txt"));
 
 app.listen(80)
