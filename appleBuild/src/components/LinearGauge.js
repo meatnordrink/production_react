@@ -67,7 +67,6 @@ export default function(props) {
         style={{padding:8}}
         >
         <Grid
-        //  xs={12}
          style={{display:'flex', justifyContent:'space-between', paddingBottom: 12, color: '#737171', width:'80%'}}
         >
             <Typography>Mild</Typography>

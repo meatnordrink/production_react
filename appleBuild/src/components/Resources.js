@@ -64,7 +64,7 @@ class Signup extends React.Component {
 
 		</form>
             <Typography variant='body1' style={{display: `${this.state.thanksDisplay}`, marginTop: '2vh', color: 'gray'}}>Your results have been sent. </Typography>
-            <Typography variant='body1' style={{display: `${this.state.thanksDisplay}`, marginTop: '1vh', color: 'gray'}}>Click <a href="https://app.us19.list-manage.com/unsubscribe?u=57db9f19d7709b29b5b8123ad&id=8eb22cf76b" target="_blank">here</a> to opt out of occasional future emails with resources to feel happier, less stressed, and more in control of your mood.</Typography>
+            <Typography variant='body1' style={{display: `${this.state.thanksDisplay}`, marginTop: '1vh', color: 'gray'}}>Click <a href="https://app.us19.list-manage.com/unsubscribe?u=57db9f19d7709b29b5b8123ad&id=8eb22cf76b" target="_blank">here</a> to opt out of occasional future emails with resources to feel happ        //  xs={12}ier, less stressed, and more in control of your mood.</Typography>
 		</div>
         <iframe name="hiddenFrame" src="about:blank" style={{display:'none'}}></iframe>
         </>

@@ -20,8 +20,6 @@ import './App.css';
 //Optional To-Do
 // * replace all the 8px paddings around radio buttons, text with some universal style
 
-// https://www.apple.com/covid19/
-
 const useStyles = makeStyles({
   root: {
     color: 'red'
