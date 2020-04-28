@@ -326,7 +326,7 @@ function RenderSuicideDialog() {
           Suicidal thought or urges need to be taken seriously. We urge you to reach out to one of the resources below if you're feeling suicidal; there's help available <b>right now</b>.
         </DialogContentText>
         <DialogContentText>
-        <b>1-800-273-8255</b>. It's the number for the <a href="http://www.suicidepreventionlifeline.org/">National Suicide Prevention Lifeline</a>, where you can speak with a skilled, trained counselor 24/7. You can also <a href="http://www.suicidepreventionlifeline.org">visit their website</a> to try a live chat.
+        <b>1-800-273-8255</b>. It's the number for the <a href="http://www.suicidepreventionlifeline.org/" target="_blank">National Suicide Prevention Lifeline</a>, where you can speak with a skilled, trained counselor 24/7. You can also <a href="http://www.suicidepreventionlifeline.org" target="_blank">visit their website</a> to try a live chat.
 
         </DialogContentText>
         <DialogContentText>

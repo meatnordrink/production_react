@@ -63,7 +63,7 @@ class Signup extends React.Component {
         <input type="submit" value="Submit" name="subscribe" id="mc-embedded-subscribe" className="button" />
 
 		</form>
-            <Typography variant='body1' style={{display: `${this.state.thanksDisplay}`, marginTop: '2vh', color: 'gray'}}>Your results have been sent. </Typography>
+            <Typography variant='body1' style={{display: `${this.state.thanksDisplay}`, marginTop: '1vh', color: 'gray'}}>Your results have been sent. </Typography>
             <Typography variant='body1' style={{display: `${this.state.thanksDisplay}`, marginTop: '1vh', color: 'gray'}}>Click <a href="https://app.us19.list-manage.com/unsubscribe?u=57db9f19d7709b29b5b8123ad&id=8eb22cf76b" target="_blank">here</a> to opt out of occasional future emails with resources to feel happier, less stressed, and more in control of your mood.</Typography>
 		</div>
         <iframe name="hiddenFrame" src="about:blank" style={{display:'none'}}></iframe>
@@ -112,10 +112,10 @@ export default function(props) {
                 
             <b>Outside the US:</b>
             <ul>
-                <li><a href='http://befrienders.org'>Befrienders Worldwide</a> has links to supportive hotlines throughout the world.</li>
+                <li><a href='http://befrienders.org' target="_blank">Befrienders Worldwide</a> has links to supportive hotlines throughout the world.</li>
                 <li>Use your local emergency services.</li>
             </ul>
-            <a href='http://www.suicideapp.com/'>Creating a safety plan</a> (when not in a crisis) can also help you cope and feel safe in the future.
+            <a href='http://www.suicideapp.com/' target="_blank">Creating a safety plan</a> (when not in a crisis) can also help you cope and feel safe in the future.
         </Typography>,
         <Typography>
             UpLift is an app that teaches scientifically-backed skills to help you feel better. 
