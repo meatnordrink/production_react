@@ -2,7 +2,7 @@
   "name": "phq9",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "http://www.uplift.app/production_react/",
   "dependencies": {
     "@material-ui/core": "^4.9.5",
     "@material-ui/icons": "^4.9.1",
