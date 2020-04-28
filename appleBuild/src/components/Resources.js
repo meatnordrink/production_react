@@ -128,8 +128,8 @@ export default function(props) {
             </ul>
 
             <b>And it's effective.</b> In a study of UpLift, the average user improved their mood by over 50% in the first month.
-
-            Complete the first session of UpLift for free — <a href='https://www.uplift.app' onClick={analyticsEvent} target="_blank">Complete the first session of UpLift for free.</a>.
+            <br />
+            <a href='https://www.uplift.app' onClick={analyticsEvent} target="_blank">Complete the first session of UpLift for free</a>.
         </Typography>      
         ]
        
