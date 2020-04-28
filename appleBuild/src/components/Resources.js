@@ -36,7 +36,7 @@ class Signup extends React.Component {
     }
   
     handleSubmit(event) {
-        if (this.state.cheapHamValue != ""){
+        if (this.state.cheapHamValue !== ""){
             event.preventDefault();
 
         }
@@ -64,9 +64,9 @@ class Signup extends React.Component {
 
 		</form>
             <Typography variant='body1' style={{display: `${this.state.thanksDisplay}`, marginTop: '1vh', color: 'gray'}}>Your results have been sent. </Typography>
-            <Typography variant='body1' style={{display: `${this.state.thanksDisplay}`, marginTop: '1vh', color: 'gray'}}>Click <a href="https://app.us19.list-manage.com/unsubscribe?u=57db9f19d7709b29b5b8123ad&id=8eb22cf76b" target="_blank">here</a> to opt out of occasional future emails with resources to feel happier, less stressed, and more in control of your mood.</Typography>
+            <Typography variant='body1' style={{display: `${this.state.thanksDisplay}`, marginTop: '1vh', color: 'gray'}}>Click <a href="https://app.us19.list-manage.com/unsubscribe?u=57db9f19d7709b29b5b8123ad&id=8eb22cf76b" target="_blank" rel='noopener'>here</a> to opt out of occasional future emails with resources to feel happier, less stressed, and more in control of your mood.</Typography>
 		</div>
-        <iframe name="hiddenFrame" src="about:blank" style={{display:'none'}}></iframe>
+        <iframe name="hiddenFrame" src="about:blank" style={{display:'none'}} title="Intentionally Blank" aria-hidden="true"></iframe>
         </>
       
        )
@@ -84,7 +84,7 @@ export default function(props) {
         
         If you're looking for a therapist, try these ideas:
             <ul>
-                <li><a href='https://www.psychologytoday.com/us/therapists' target='_blank'>Psychology Today</a> lists therapists in the US and Canada.</li>
+                <li><a href='https://www.psychologytoday.com/us/therapists' target='_blank' rel='noopener'>Psychology Today</a> lists therapists in the US and Canada.</li>
                 <li>Try asking your doctor for a referral. They likely know the therapists available in the area, and can help you find one that will meet your needs.</li>
             </ul>
         </Typography>,
@@ -92,30 +92,30 @@ export default function(props) {
         Medications can help many people overcome depression, especially in combination with therapy.
         
             <ul>
-                <li><a href='https://www.helpguide.org/articles/depression/antidepressant-medication.htm' target='_blank'>There are many types of antidepressants</a>.</li>
+                <li><a href='https://www.helpguide.org/articles/depression/antidepressant-medication.htm' target='_blank' rel='noopener'>There are many types of antidepressants</a>.</li>
                 <li>Antidepressants are about as effective as psychotherapy (though positive effects tend not to be as long-lasting).</li>
                 <li>Medication can be the fastest route to feeling better, particularly in severe depression.</li>
             </ul>
         </Typography>,
         <Typography>
-            For people with low mood, it’s not uncommon to think of suicide. However, if you have suicidal thoughts, a plan to harm yourself, or <a href='http://cssrs.columbia.edu/wp-content/uploads/Community-Card-2women-2018c.pdf' target='_blank'>other suicide risk factors</a>, it's important to take it seriously.
+            For people with low mood, it’s not uncommon to think of suicide. However, if you have suicidal thoughts, a plan to harm yourself, or <a href='https://suicidepreventionlifeline.org/how-we-can-all-prevent-suicide/' target='_blank' rel='noopener'>other suicide risk factors</a>, it's important to take it seriously.
 
             Call a friend or therapist, or make use of these services:
             
             <br />
             <b>In the US:</b>
             <ul>
-                <li>Call <b><a href="tel:18002738255">1-800-273-8255</a></b> to speak with a skilled, trained counselor 24/7 or visit the <a href="http://www.suicidepreventionlifeline.org/" target="_blank">National Suicide Prevention Lifeline</a> for a live chat.</li>
-                <li><b>Text START to <a href="sms:741741">741741.</a></b> The <a href="http://www.crisistextline.org/" target="_blank">Crisis Text Line</a> operates 24/7 in the US, and is for any kind of crisis.</li>
+                <li>Call <b><a href="tel:18002738255">1-800-273-8255</a></b> to speak with a skilled, trained counselor 24/7 or visit the <a href="http://www.suicidepreventionlifeline.org/" target="_blank" rel='noopener'>National Suicide Prevention Lifeline</a> for a live chat.</li>
+                <li><b>Text START to <a href="sms:741741">741741.</a></b> The <a href="http://www.crisistextline.org/" target="_blank" rel='noopener'>Crisis Text Line</a> operates 24/7 in the US, and is for any kind of crisis.</li>
                 For emergencies call <b><a href="tel:911">911</a></b>.
             </ul>
                 
             <b>Outside the US:</b>
             <ul>
-                <li><a href='http://befrienders.org' target="_blank">Befrienders Worldwide</a> has links to supportive hotlines throughout the world.</li>
+                <li><a href='http://befrienders.org' target="_blank" rel='noopener'>Befrienders Worldwide</a> has links to supportive hotlines throughout the world.</li>
                 <li>Use your local emergency services.</li>
             </ul>
-            <a href='http://www.suicideapp.com/' target="_blank">Creating a safety plan</a> (when not in a crisis) can also help you cope and feel safe in the future.
+            <a href='http://www.suicideapp.com/' target="_blank" rel='noopener'>Creating a safety plan</a> (when not in a crisis) can also help you cope and feel safe in the future.
         </Typography>,
         <Typography>
             UpLift is an app that teaches scientifically-backed skills to help you feel better. 
@@ -129,7 +129,7 @@ export default function(props) {
 
             <b>And it's effective.</b> In a study of UpLift, the average user improved their mood by over 50% in the first month.
             <br />
-            <a href='https://www.uplift.app' onClick={analyticsEvent} target="_blank">Complete the first session of UpLift for free</a>.
+            <a href='https://www.uplift.app' onClick={analyticsEvent} target="_blank" rel='noopener'>Complete the first session of UpLift for free</a>.
         </Typography>      
         ]
        

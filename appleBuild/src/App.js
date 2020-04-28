@@ -326,11 +326,11 @@ function RenderSuicideDialog() {
           Suicidal thought or urges need to be taken seriously. We urge you to reach out to one of the resources below if you're feeling suicidal; there's help available <b>right now</b>.
         </DialogContentText>
         <DialogContentText>
-        <b>1-800-273-8255</b>. It's the number for the <a href="http://www.suicidepreventionlifeline.org/" target="_blank">National Suicide Prevention Lifeline</a>, where you can speak with a skilled, trained counselor 24/7. You can also <a href="http://www.suicidepreventionlifeline.org" target="_blank">visit their website</a> to try a live chat.
+        <b>1-800-273-8255</b>. It's the number for the <a href="http://www.suicidepreventionlifeline.org/" target="_blank" rel='noopener'>National Suicide Prevention Lifeline</a>, where you can speak with a skilled, trained counselor 24/7. You can also <a href="http://www.suicidepreventionlifeline.org" target="_blank" rel='noopener'>visit their website</a> to try a live chat.
 
         </DialogContentText>
         <DialogContentText>
-          The <a href="http://www.crisistextline.org/" target="_blank">Crisis Text Line</a> is a service that operates 24/7, works anywhere in the US, Canada, or the UK, and is for any kind of crisis. A trained crisis volunteer will respond to your text quickly (usually in under 5 minutes). 
+          The <a href="http://www.crisistextline.org/" target="_blank" rel='noopener'>Crisis Text Line</a> is a service that operates 24/7, works anywhere in the US, Canada, or the UK, and is for any kind of crisis. A trained crisis volunteer will respond to your text quickly (usually in under 5 minutes). 
           <ul>
             <li>For the US, text <b>741741</b>.</li>
             <li>For Canada, text <b>686868</b>.</li>
@@ -338,7 +338,7 @@ function RenderSuicideDialog() {
           </ul>
         </DialogContentText>
         <DialogContentText>
-          If you're outside the US, <a href="http://befrienders.org" target="_blank">Befrienders Worldwide</a> has links to hotlines throughout the world. They'll help connect you to someone who can listen in a supportive and nonjudgmental way. Click on the link now to be connected.
+          If you're outside the US, <a href="http://befrienders.org" target="_blank" rel='noopener'>Befrienders Worldwide</a> has links to hotlines throughout the world. They'll help connect you to someone who can listen in a supportive and nonjudgmental way. Click on the link now to be connected.
         </DialogContentText>
       </DialogContent>
       <DialogActions>

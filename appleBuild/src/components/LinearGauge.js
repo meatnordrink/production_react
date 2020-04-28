@@ -34,7 +34,6 @@ const useStyles = makeStyles({
         justifyContent: 'flex-end',
         padding: '8px 0px 0px 0px',
         transition: '4s',
-        justifyContent: 'flex-end',
         marginLeft: props => props.marginLeft
     },
     circle: {

@@ -101,7 +101,7 @@ function FoodThree(props) {
     <Typography>
       <Typography paragraph='true'>It's true that many fish are very high in mercury, a chemical that's harmful to humans. But there are lots of delicious fish that are much lower in mercury, such as salmon, shrimp, sardines, tilapia, cod, catfish, scallops, and clam. Larger fish, like swordfish, shark, and albacore tuna (light tuna is lower) are higher in mercury and should be eaten less.</Typography>
 
-      Want to know if your favorite fish is low mercury? Check out a complete listing <a href='http://www.fda.gov/Food/FoodborneIllnessContaminants/Metals/ucm115644.htm' target='_blank'>here</a>.
+      Want to know if your favorite fish is low mercury? Check out a complete listing <a href='http://www.fda.gov/Food/FoodborneIllnessContaminants/Metals/ucm115644.htm' target='_blank' rel='noopener'>here</a>.
     </Typography>,
     <Typography>
       There's some evidence that fish oil supplements are helpful for depression as well, but there's more evidence for eating actual fish. Scientists theorize that the other nutrients in fish, not present in the oil, may also play a role, and enhance the anti-depressive effect. But, if you don't actually like fish, fish oil may be a good option!	
